@@ -8,10 +8,6 @@ set nocompatible
 " automatically load changed files
 set autoread
 
-" auto-reload vimrc
-autocmd! bufwritepost vimrc source ~/.vim/vimrc
-"autocmd! bufwritepost gvimrc source ~/.vim/gvimrc
-
 " show the filename in the window titlebar
 set title
 
@@ -24,15 +20,11 @@ set showcmd
 " mouse support
 set mouse=a
 
-" line numbers
-" set number
+" line row, col
+set ruler
 
 " highlight cursor line
 set cursorline
-
-" wrapping stuff
-" set textwidth=80
-" set colorcolumn=80
 
 " ignore whitespace in diff mode
 set diffopt+=iwhite
@@ -60,9 +52,6 @@ set ttyfast
 
 " let vim open up to 100 tabs at once
 set tabpagemax=100
-
-" case-insensitive filename completion
-" set wildignorecase
 
 """""""""""""
 " Searching "
@@ -96,17 +85,21 @@ set smartindent
 """""""""
 
 syntax enable
-set background=dark 
+set background=light 
 
 """"""""
 " GVim "
 """"""""
 
-"disable cursor blinking
+" disable cursor blinking
 set gcr=n:blinkon0
 
-"remove menu bar
+" remove menu bar
 set guioptions-=m
+
+colorscheme desert
+set guifont=Monaco:h13
+
 
 """""""""""""""""""""
 " Language-Specific "
