@@ -32,6 +32,9 @@ set diffopt+=iwhite
 " Be able to arrow key and backspace across newlines
 set whichwrap=bs<>[]
 
+" Make backspace not terrible
+set backspace=indent,eol,start
+
 " Status bar
 set laststatus=2
 
