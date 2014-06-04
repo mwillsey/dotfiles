@@ -1,4 +1,4 @@
-;; max's work init.el
+;; max's emacs.d
 
 ;; melpa
 (require 'package)
@@ -29,9 +29,6 @@
 ;; ido mode
 (ido-mode 1) 
 
-;; wrapping
-(global-visual-line-mode 1)
-
 ;; inhibit startup screen
 (setq inhibit-splash-screen t)
 
@@ -47,7 +44,6 @@
 
 ;; unique buffer names
 (toggle-uniquify-buffer-names t)
-
 
 ;; theming
 (load-theme 'misterioso t)
