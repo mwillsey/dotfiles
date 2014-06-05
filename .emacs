@@ -19,11 +19,16 @@
 (column-number-mode t)
 (toggle-uniquify-buffer-names t)
 (setq mac-command-modifier 'meta)
-(setq inhibit-splash-screen t)
-(setq initial-scratch-message "")
-(setq initial-major-mode 'text-mode)
 (load-theme 'misterioso t)
 (setq ispell-program-name "aspell")
+
+;; init setup
+(setq inhibit-splash-screen t)
+(setq initial-scratch-message "")
+(add-hook 'after-init-hook
+          (lambda ()
+            (org-agenda-list)
+            (other-window 1)))
 
 ;; show matching parens
 (show-paren-mode 1)
@@ -53,6 +58,7 @@
 (define-key evil-ex-map "b " 'ido-switch-buffer)
 
 ;; org setup
+(require 'org)
 (add-hook 'org-mode-hook
           (lambda ()
             (visual-line-mode 1)
@@ -62,7 +68,10 @@
 (setq org-directory "~/Dropbox/org/")
 
 (setq org-default-notes-file (concat org-directory "notes.org"))
+(add-to-list 'org-agenda-files (concat org-directory "todo.org"))
+
 (define-key global-map (kbd "C-c c") 'org-capture)
+(define-key global-map (kbd "C-c a") 'org-agenda)
 
 (setq org-capture-templates 
       '(("w" "Writing" entry 
