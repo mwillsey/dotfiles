@@ -26,9 +26,6 @@
 ;; winner mode for undoing window changes
 (winner-mode 1)
 
-;; ido mode
-(ido-mode 1) 
-
 ;; inhibit startup screen
 (setq inhibit-splash-screen t)
 
@@ -54,6 +51,9 @@
 (set-face-background 'show-paren-match nil)
 (set-face-foreground 'show-paren-match "cyan")
 
+;; centralized backups
+(setq backup-directory-alist '(("." . "~/.emacs.saves")))
+
 ;; evil
 (require 'evil)
 (evil-mode 1)
@@ -65,6 +65,10 @@
 (define-key evil-motion-state-map "$" #'evil-end-of-visual-line)
 (define-key evil-motion-state-map "^" #'evil-first-non-blank-of-visual-line)
 (define-key evil-motion-state-map "0" #'evil-beginning-of-visual-line)
+
+;; ido mode
+(ido-mode 1) 
+(define-key evil-ex-map "e " 'ido-find-file)
 
 ;; use aspell
 (setq ispell-program-name "aspell")
