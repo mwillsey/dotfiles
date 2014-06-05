@@ -6,44 +6,24 @@
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
-;; commmand as meta
-(setq mac-command-modifier 'meta)
-
-;; fix paths
-(setq exec-path (cons "/usr/local/bin/" exec-path))
-
-;; get rid of scroll and tool bar
-(tool-bar-mode -1) 
+;; a bunch of quick one line fixes
+(tool-bar-mode -1)                    ;; fix ui
 (scroll-bar-mode -1)
-
-;; scrolling
-(setq mouse-wheel-scroll-amount '(1))
+(setq mouse-wheel-scroll-amount '(1)) ;; fix scroll
 (setq mouse-wheel-progressive-speed nil)
-
-;; enable typing over selected region
-(pending-delete-mode t)
-
-;; winner mode for undoing window changes
-(winner-mode 1)
-
-;; inhibit startup screen
+(pending-delete-mode t)               ;; type over region 
+(winner-mode 1)                       ;; undo window changes
+(setq exec-path (cons "/usr/local/bin/" exec-path))
+(global-auto-revert-mode 1)
+(setq-default indent-tabs-mode nil)
+(column-number-mode t)
+(toggle-uniquify-buffer-names t)
+(setq mac-command-modifier 'meta)
 (setq inhibit-splash-screen t)
-
-;; change scratch buffer
 (setq initial-scratch-message "")
 (setq initial-major-mode 'text-mode)
-
-;; no tabs
-(setq-default indent-tabs-mode nil)
-
-;; show column number
-(column-number-mode t)
-
-;; unique buffer names
-(toggle-uniquify-buffer-names t)
-
-;; theming
 (load-theme 'misterioso t)
+(setq ispell-program-name "aspell")
 
 ;; show matching parens
 (show-paren-mode 1)
@@ -52,26 +32,25 @@
 (set-face-foreground 'show-paren-match "cyan")
 
 ;; centralized backups
-(setq backup-directory-alist '(("." . "~/.emacs.saves")))
+(setq backup-directory-alist `(("." . "~/.emacs.saves")))
 
 ;; evil
 (require 'evil)
 (evil-mode 1)
 
-;; evil key setup
-;; make evil respect visual lines
+;; evil key setup - make evil respect visual lines
 (define-key evil-motion-state-map "j" #'evil-next-visual-line)
 (define-key evil-motion-state-map "k" #'evil-previous-visual-line)
 (define-key evil-motion-state-map "$" #'evil-end-of-visual-line)
 (define-key evil-motion-state-map "^" #'evil-first-non-blank-of-visual-line)
 (define-key evil-motion-state-map "0" #'evil-beginning-of-visual-line)
 
+(evil-ex-define-cmd "sh" 'shell)
+
 ;; ido mode
 (ido-mode 1) 
 (define-key evil-ex-map "e " 'ido-find-file)
-
-;; use aspell
-(setq ispell-program-name "aspell")
+(define-key evil-ex-map "b " 'ido-switch-buffer)
 
 ;; org setup
 (add-hook 'org-mode-hook
@@ -79,3 +58,26 @@
             (visual-line-mode 1)
             (org-indent-mode 1)
             (flyspell-mode 1)))
+
+(setq org-directory "~/Dropbox/org/")
+
+(setq org-default-notes-file (concat org-directory "notes.org"))
+(define-key global-map (kbd "C-c c") 'org-capture)
+
+(setq org-capture-templates 
+      '(("w" "Writing" entry 
+         (file "~/Dropbox/org/writing.org") 
+         "* %t \n%?"
+         :emptylines 1) 
+        ("r" "To Read" entry 
+         (file+headline "~/Dropbox/org/reading.org" "To Read") 
+         ""
+         :emptylines 1) 
+        ("n" "Note" entry 
+         (file+headline "~/Dropbox/org/notes.org" "Inbox") 
+         ""
+         :emptylines 1) 
+        ("t" "Todo" entry 
+         (file+headline "~/Dropbox/org/todo.org" "Inbox") 
+         "* TODO %?"
+         :emptylines 1)))
