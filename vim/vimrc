@@ -1,3 +1,11 @@
+" my vimrc
+
+""""""""""""
+" Pathogen "
+""""""""""""
+
+execute pathogen#infect()
+
 """"""
 " UI "
 """"""
