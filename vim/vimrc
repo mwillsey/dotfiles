@@ -4,7 +4,8 @@
 " Pathogen "
 """"""""""""
 
-execute pathogen#infect()
+call pathogen#infect()
+Helptags
 
 """"""
 " UI "
