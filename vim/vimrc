@@ -127,3 +127,6 @@ au BufRead,BufNewFile *.html.erb set ft=eruby
 
 " Add json syntax highlighting
 au BufNewFile,BufRead *.json set ft=json syntax=javascript
+
+" Add markdown syntax highlighting
+au BufNewFile,BufRead *.md set ft=markdown 
