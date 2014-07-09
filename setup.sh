@@ -1,10 +1,11 @@
 #!/bin/sh
 
+BASEDIR=$(dirname $0)
 # sets up the symlinks
 
 # vim
-ln -s vim/vimrc ~/.vimrc
-ln -s vim ~/.vim
+ln -s $BASEDIR/.vimrc ~/.vimrc
+ln -s $BASEDIR/.vim ~/.vim
 
 # emacs
-ln -s emacs ~/.emacs.d
+ln -s $BASEDIR/.emacs.d ~/.emacs.d
