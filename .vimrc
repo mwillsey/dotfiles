@@ -66,6 +66,10 @@ set ttyfast
 " let vim open up to 100 tabs at once
 set tabpagemax=100
 
+" for faster motion
+nmap <C-j> 20j
+nmap <C-k> 20k
+
 """""""""""""
 " Searching "
 """""""""""""
