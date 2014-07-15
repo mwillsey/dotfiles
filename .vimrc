@@ -66,9 +66,16 @@ set ttyfast
 " let vim open up to 100 tabs at once
 set tabpagemax=100
 
+"""""""""""""
+" Shortcuts "
+"""""""""""""
+
 " for faster motion
 nmap <C-j> 20j
 nmap <C-k> 20k
+
+" emacs-like spell correction with <c-;> that puts you back in insert
+imap <c-;> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 """""""""""""
 " Searching "
