@@ -79,6 +79,9 @@ set directory=./.backup
 " Shortcuts "
 """""""""""""
 
+" easy-aling in visual mode
+vmap <Enter> <Plug>(EasyAlign)
+
 " for faster motion
 nmap <C-j> 20j
 nmap <C-k> 20k
