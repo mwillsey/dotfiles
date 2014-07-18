@@ -66,6 +66,15 @@ set ttyfast
 " let vim open up to 100 tabs at once
 set tabpagemax=100
 
+""""""""""
+" Backup "
+""""""""""
+
+set backup
+set writebackup
+set backupdir=./.backup
+set directory=./.backup
+
 """""""""""""
 " Shortcuts "
 """""""""""""
