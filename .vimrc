@@ -67,15 +67,15 @@ set tabpagemax=100
 " Shortcuts "
 """""""""""""
 
-" easy-aling in visual mode
+" easy-align in visual mode
 vmap <Enter> <Plug>(EasyAlign)
 
 " for faster motion
 nmap <C-j> 20j
 nmap <C-k> 20k
 
-" emacs-like spell correction with <c-;> that puts you back in insert
-imap <c-;> <c-g>u<Esc>[s1z=`]a<c-g>u
+" emacs-like spell correction with <c-l> that puts you back in insert
+imap <C-l> <C-g>u<Esc>[s1z=`]A<C-g>u
 
 """""""""""""
 " Searching "
