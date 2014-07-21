@@ -66,15 +66,6 @@ set ttyfast
 " let vim open up to 100 tabs at once
 set tabpagemax=100
 
-""""""""""
-" Backup "
-""""""""""
-
-set backup
-set writebackup
-set backupdir=./.backup
-set directory=./.backup
-
 """""""""""""
 " Shortcuts "
 """""""""""""
@@ -121,7 +112,8 @@ set smartindent
 """""""""
 
 syntax enable
-set background=light 
+colorscheme default
+set background=light
 
 """"""""
 " GVim "
@@ -132,8 +124,6 @@ set gcr=n:blinkon0
 
 " remove menu bar
 set guioptions-=m
-
-colorscheme desert
 set guifont=Monaco:h13
 
 
