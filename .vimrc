@@ -32,9 +32,6 @@ set mouse=a
 " line row, col
 set ruler
 
-" highlight cursor line
-set cursorline
-
 " ignore whitespace in diff mode
 set diffopt+=iwhite
 
