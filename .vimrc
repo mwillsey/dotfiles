@@ -84,7 +84,7 @@ imap <c-;> <c-g>u<Esc>[s1z=`]a<c-g>u
 " Searching "
 """""""""""""
 
-set hlsearch "when there is a previous search pattern, highlight all its matches
+set nohlsearch "no search highlighting by default
 set incsearch "while typing a search command, show immediately where the so far typed pattern matches
 set ignorecase "ignore case in search patterns
 set smartcase "override the 'ignorecase' option if the search pattern contains uppercase characters
