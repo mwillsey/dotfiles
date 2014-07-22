@@ -4,9 +4,12 @@ BASEDIR=$(dirname $0)
 # sets up the symlinks
 
 # vim
-FILES=( .vim .vimrc .emacs.d .tmux.conf)
+FILES=".vim 
+.vimrc
+.emacs.d
+.tmux.conf"
 
-for file in ${FILES[@]}
+for file in $FILES
 do
     if [ -e ~/$file ]
     then
