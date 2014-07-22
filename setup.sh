@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BASEDIR=$(dirname $0)
+BASEDIR=~/dotfiles
 # sets up the symlinks
 
 # vim
