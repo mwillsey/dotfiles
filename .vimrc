@@ -109,20 +109,19 @@ set smartindent
 """""""""
 
 syntax enable
-colorscheme default
-set background=light
+colorscheme solarized
+set background=dark
 
 """"""""
 " GVim "
 """"""""
 
-" disable cursor blinking
-set gcr=n:blinkon0
-
-" remove menu bar
-set guioptions-=m
-set guifont=Monaco:h13
-
+if has('gui_running')
+    set gcr=n:blinkon0
+    set guioptions-=m
+    set guifont=Monaco:h11
+    set background=light
+endif
 
 """""""""""""""""""""
 " Language-Specific "
