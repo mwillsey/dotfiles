@@ -67,12 +67,14 @@ set tabpagemax=100
 " Shortcuts "
 """""""""""""
 
+nnoremap <CR> :nohlsearch<CR>
+
 " easy-align in visual mode
-vmap <Enter> <Plug>(EasyAlign)
+vmap <CR> <Plug>(EasyAlign)
 
 " for faster motion
-nmap <C-j> 20j
-nmap <C-k> 20k
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
 
 " emacs-like spell correction with <c-l> that puts you back in insert
 imap <C-l> <C-g>u<Esc>[s1z=`]A<C-g>u
@@ -81,11 +83,11 @@ imap <C-l> <C-g>u<Esc>[s1z=`]A<C-g>u
 " Searching "
 """""""""""""
 
-set nohlsearch "no search highlighting by default
-set incsearch "while typing a search command, show immediately where the so far typed pattern matches
-set ignorecase "ignore case in search patterns
-set smartcase "override the 'ignorecase' option if the search pattern contains uppercase characters
-set gdefault "imply global for new searches
+set hlsearch 
+set incsearch 
+set ignorecase 
+set smartcase 
+set gdefault 
 
 """""""""""""
 " Indenting "
