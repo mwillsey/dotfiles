@@ -67,7 +67,11 @@ set tabpagemax=100
 " Shortcuts "
 """""""""""""
 
+" enter to un highlight search
 nnoremap <CR> :nohlsearch<CR>
+
+" make Y behave like D (go to end of line only)
+nnoremap Y y$
 
 " easy-align in visual mode
 vmap <CR> <Plug>(EasyAlign)
