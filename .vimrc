@@ -87,8 +87,6 @@ imap <C-l> <C-g>u<Esc>[s1z=`]A<C-g>u
 " easy-align in visual mode
 vmap <CR> <Plug>(EasyAlign)
 
-let g:pandoc#folding#level = 1
-
 """""""""""""
 " Searching "
 """""""""""""
