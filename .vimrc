@@ -73,15 +73,21 @@ nnoremap <CR> :nohlsearch<CR>
 " make Y behave like D (go to end of line only)
 nnoremap Y y$
 
-" easy-align in visual mode
-vmap <CR> <Plug>(EasyAlign)
-
 " for faster motion
 nnoremap <C-j> <C-d>
 nnoremap <C-k> <C-u>
 
 " emacs-like spell correction with <c-l> that puts you back in insert
 imap <C-l> <C-g>u<Esc>[s1z=`]A<C-g>u
+
+"""""""""""
+" Plugins "
+"""""""""""
+
+" easy-align in visual mode
+vmap <CR> <Plug>(EasyAlign)
+
+let g:pandoc#folding#level = 1
 
 """""""""""""
 " Searching "
