@@ -11,26 +11,8 @@ Helptags
 " UI "
 """"""
 
-" disable vi compatibility
-set nocompatible
-
-" automatically load changed files
-set autoread
-
-" show the filename in the window titlebar
-set title
-
-" set encoding
-set encoding=utf-8
-
-" display incomplete commands at the bottom
-set showcmd
-
-" mouse support
-set mouse=a
-
-" line row, col
-set ruler
+" basic stuff
+set nocompatible autoread title encoding=utf-8 showcmd mouse=a ruler laststatus=2 ttyfast
 
 " ignore whitespace in diff mode
 set diffopt+=iwhite
@@ -41,9 +23,6 @@ set whichwrap=bs<>[]
 " Make backspace not terrible
 set backspace=indent,eol,start
 
-" Status bar
-set laststatus=2
-
 " remember last cursor position
 autocmd BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -51,24 +30,14 @@ autocmd BufReadPost *
 	\ endif
 
 " proper word wrapping
-set wrap
-set linebreak
+set wrap linebreak
 
 " enable completion
-set ofu=syntaxcomplete#Complete
-
-" make laggy connections work faster
-set ttyfast
-
-" let vim open up to 100 tabs at once
-set tabpagemax=100
+set omnifunc=syntaxcomplete#Complete
 
 """""""""""""
 " Shortcuts "
 """""""""""""
-
-" enter to un highlight search
-nnoremap <CR> :nohlsearch<CR>
 
 " make Y behave like D (go to end of line only)
 nnoremap Y y$
@@ -91,28 +60,18 @@ vmap <CR> <Plug>(EasyAlign)
 " Searching "
 """""""""""""
 
-set hlsearch 
-set incsearch 
-set ignorecase 
-set smartcase 
-set gdefault 
+set hlsearch incsearch ignorecase smartcase gdefault 
+
+" enter to un highlight search
+nnoremap <CR> :nohlsearch<CR>
+
 
 """""""""""""
 " Indenting "
 """""""""""""
 
-" When auto-indenting, use the indenting format of the previous line
-set copyindent
-" Tabs are stupid
-set tabstop=4
-set shiftwidth=4
-set expandtab
-" Copy indent from current line when starting a new line (typing <CR> in Insert
-" mode or when using the "o" or "O" command)
-set autoindent
-" Automatically inserts one extra level of indentation in some cases, and works
-" for C-like files
-set smartindent
+set tabstop=4 shiftwidth=4 expandtab
+set autoindent copyindent smartindent
 
 """""""""
 " Theme "
@@ -127,10 +86,7 @@ set background=dark
 """"""""
 
 if has('gui_running')
-    set gcr=n:blinkon0
-    set guioptions-=m
-    set guifont=Monaco:h11
-    set background=light
+    set gcr=n:blinkon0 guioptions-=m guifont=Monaco:h11 background=light
 endif
 
 """""""""""""""""""""
