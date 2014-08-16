@@ -7,6 +7,7 @@ BASEDIR=~/dotfiles
 FILES=".vim 
 .vimrc
 .emacs.d
+.zshrc
 .tmux.conf"
 
 for file in $FILES
@@ -19,14 +20,3 @@ do
         echo "created link ~/$file -> $BASEDIR/$file"
     fi
 done
-
-
-# for filename in ".vim" ".vimrc" ".emacs"
-# ln -s $BASEDIR/.vimrc ~/.vimrc
-# ln -s $BASEDIR/.vim ~/.vim
-
-# # emacs
-# ln -s $BASEDIR/.emacs.d ~/.emacs.d
-
-# # tmux
-# ln -s $BASEDIR/.tmux.conf ~/.tmux.conf
