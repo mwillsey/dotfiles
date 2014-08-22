@@ -1,18 +1,30 @@
 " my vimrc
 
-""""""""""""
-" Pathogen "
-""""""""""""
+""""""""""
+" Vundle "
+""""""""""
 
-call pathogen#infect()
-Helptags
+set nocompatible
+filetype off                
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'altercation/vim-colors-solarized'
+
+call vundle#end() 
+filetype plugin indent on 
 
 """"""
 " UI "
 """"""
 
 " basic stuff
-set nocompatible autoread title encoding=utf-8 showcmd mouse=a ruler laststatus=2 ttyfast
+set autoread title encoding=utf-8 showcmd mouse=a ruler laststatus=2 ttyfast
 
 " ignore whitespace in diff mode
 set diffopt+=iwhite
