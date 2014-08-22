@@ -1,6 +1,7 @@
-# some file vim creates
-.netrwhist
-
-# ignore the .vim folder, it's managed by Vundle
-.vim
+# ignore the .vim folder, except include Vundle
+.vim/*
+!.vim/bundle
+.vim/bundle/*
+!.vim/bundle/Vundle.vim
+!.vim/bundle/Vundle.vim/*
 

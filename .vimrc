@@ -5,24 +5,31 @@
 """"""""""
 
 set nocompatible
-filetype off                
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+try
+    filetype off                
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/vundle'
+    " set the runtime path to include Vundle and initialize
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
 
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'tpope/vim-commentary'
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'dag/vim2hs'
+    " let Vundle manage Vundle, required
+    Plugin 'gmarik/vundle'
 
-call vundle#end() 
-filetype plugin indent on 
+    Plugin 'altercation/vim-colors-solarized'
+    Plugin 'junegunn/vim-easy-align'
+    Plugin 'tpope/vim-commentary'
+    Plugin 'vim-pandoc/vim-pandoc'
+    Plugin 'vim-pandoc/vim-pandoc-syntax'
+    Plugin 'dag/vim2hs'
+
+    call vundle#end() 
+    filetype plugin indent on 
+catch
+    echom "Something went wrong with Vundle, it probably doesn't exist. Run this: "
+    echom "git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+    echom "vim +PluginInstall +qall"
+endtry
 
 """"""
 " UI "
