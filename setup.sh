@@ -4,11 +4,12 @@ BASEDIR=~/dotfiles
 # sets up the symlinks
 
 # vim
-FILES=".vim 
+FILES="
 .vimrc
 .emacs.d
 .zshrc
-.tmux.conf"
+.tmux.conf
+"
 
 for file in $FILES
 do
