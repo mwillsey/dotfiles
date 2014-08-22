@@ -5,6 +5,7 @@ BASEDIR=~/dotfiles
 
 # vim
 FILES="
+.vim
 .vimrc
 .emacs.d
 .zshrc
