@@ -1,5 +1,6 @@
 # some file vim creates
 .netrwhist
 
-# vim backup
-.backup
+# ignore the .vim folder, it's managed by Vundle
+.vim
+

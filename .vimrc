@@ -12,9 +12,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'gmarik/vundle'
 
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'tpope/vim-commentary'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'dag/vim2hs'
 
 call vundle#end() 
 filetype plugin indent on 
