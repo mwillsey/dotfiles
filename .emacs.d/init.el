@@ -1,4 +1,4 @@
-;; max's emacs.d
+;;; max's emacs.d 
 
 ;; melpa
 (require 'package)
@@ -21,14 +21,20 @@
 (setq mac-command-modifier 'meta)
 (load-theme 'misterioso t)
 (setq ispell-program-name "aspell")
+(setq default-directory "~")
+(global-visual-line-mode 1)
 
 ;; init setup
 (setq inhibit-splash-screen t)
 (setq initial-scratch-message "")
-(add-hook 'after-init-hook
-          (lambda ()
-            (org-agenda-list)
-            (other-window 1)))
+
+;; setup PATH
+(let ((path-from-shell
+       (replace-regexp-in-string
+        "[[:space:]\n]*$" ""
+        (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
+  (setenv "PATH" path-from-shell)
+  (setq exec-path (split-string path-from-shell path-separator)))
 
 ;; show matching parens
 (show-paren-mode 1)
@@ -57,36 +63,20 @@
 (define-key evil-ex-map "e " 'ido-find-file)
 (define-key evil-ex-map "b " 'ido-switch-buffer)
 
-;; org setup
-(require 'org)
-(add-hook 'org-mode-hook
+;;; LaTeX setup
+
+(add-hook 'LaTeX-mode-hook 
           (lambda ()
-            (visual-line-mode 1)
-            (org-indent-mode 1)
             (flyspell-mode 1)))
 
-(setq org-directory "~/Dropbox/org/")
+(setq TeX-PDF-mode t)
 
-(setq org-default-notes-file (concat org-directory "notes.org"))
-(add-to-list 'org-agenda-files (concat org-directory "todo.org"))
+;; no more "error occured after last TeX file closed
+(setq LaTeX-command-style (quote (("" "%(PDF)%(latex) -file-line-error %S%(PDFout)"))))
 
-(define-key global-map (kbd "C-c c") 'org-capture)
-(define-key global-map (kbd "C-c a") 'org-agenda)
-
-(setq org-capture-templates 
-      '(("w" "Writing" entry 
-         (file "~/Dropbox/org/writing.org") 
-         "* %t \n%?"
-         :emptylines 1) 
-        ("r" "To Read" entry 
-         (file+headline "~/Dropbox/org/reading.org" "To Read") 
-         ""
-         :emptylines 1) 
-        ("n" "Note" entry 
-         (file+headline "~/Dropbox/org/notes.org" "Inbox") 
-         ""
-         :emptylines 1) 
-        ("t" "Todo" entry 
-         (file+headline "~/Dropbox/org/todo.org" "Inbox") 
-         "* TODO %?"
-         :emptylines 1)))
+;; use Skim as default pdf viewer
+;; Skim's displayline is used for forward search (from .tex to .pdf)
+;; option -b highlights the current line; option -g opens Skim in the background  
+(setq TeX-view-program-selection '((output-pdf "Skim")))
+(setq TeX-view-program-list
+     '(("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))

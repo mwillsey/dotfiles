@@ -21,7 +21,9 @@ try
     Plugin 'tpope/vim-commentary'
     Plugin 'vim-pandoc/vim-pandoc'
     Plugin 'vim-pandoc/vim-pandoc-syntax'
+    Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
     Plugin 'dag/vim2hs'
+    Plugin 'rking/ag.vim'
 
     call vundle#end() 
     filetype plugin indent on 
@@ -47,6 +49,9 @@ set whichwrap=bs<>[]
 " Make backspace not terrible
 set backspace=indent,eol,start
 
+" no fold column
+let g:pandoc#folding#fdc=0
+
 " remember last cursor position
 autocmd BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -66,12 +71,15 @@ set omnifunc=syntaxcomplete#Complete
 " make Y behave like D (go to end of line only)
 nnoremap Y y$
 
-" for faster motion
-nnoremap <C-j> <C-d>
-nnoremap <C-k> <C-u>
-
 " emacs-like spell correction with <c-l> that puts you back in insert
 imap <C-l> <C-g>u<Esc>[s1z=`]A<C-g>u
+
+"""""""""""""
+" Dev Setup "
+"""""""""""""
+
+" look up recursively for a tags file
+set tags=tags,./tags;/
 
 """""""""""
 " Plugins "
@@ -79,6 +87,28 @@ imap <C-l> <C-g>u<Esc>[s1z=`]A<C-g>u
 
 " easy-align in visual mode
 vmap <CR> <Plug>(EasyAlign)
+
+" pandoc
+let g:pandoc#syntax#style#emphases=0
+
+"" latex-suite ""
+
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*'
+let g:Tex_ViewRule_pdf = 'Skim'
+
+" create align* mapping after startup
+au VimEnter call IMAP('EAL', "\\begin{align*}\<CR>\<CR>\\end{align*}", 'tex')
+
+" compile on write
+au BufWritePost *.tex silent call Tex_RunLaTeX()
+
+"" haskell ""
+
+let g:haskell_autotags=1
+
+
+
 
 """""""""""""
 " Searching "
@@ -110,19 +140,20 @@ set background=dark
 """"""""
 
 if has('gui_running')
-    set gcr=n:blinkon0 guioptions-=m guifont=Monaco:h11 background=light
+    set gcr=n:blinkon0 guioptions-=m guifont=Monaco:h11 
+    set background=light
+    set cursorline
 endif
 
 """""""""""""""""""""
 " Language-Specific "
 """""""""""""""""""""
 
-" load the plugin and indent settings for the detected filetype
-filetype plugin indent on
+" spell check on not code
+au FileType {markdown,text,tex} setlocal spell
 
-" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
-au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
-au BufRead,BufNewFile *.html.erb set ft=eruby
+" smaller indent in haskell
+au FileType haskell setlocal shiftwidth=2 tabstop=2
 
 " Add json syntax highlighting
 au BufNewFile,BufRead *.json set ft=json syntax=javascript
