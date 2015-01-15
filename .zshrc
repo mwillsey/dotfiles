@@ -11,4 +11,9 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export EDITOR='vim'
+export EDITOR='mvim -v'
+alias vim='mvim -v'
+alias vi='mvim -v'
+
+# OPAM configuration
+. /Users/mwillsey/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

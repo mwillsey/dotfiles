@@ -24,6 +24,7 @@ try
     Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
     Plugin 'dag/vim2hs'
     Plugin 'rking/ag.vim'
+    Plugin 'wting/rust.vim'
 
     call vundle#end() 
     filetype plugin indent on 
@@ -48,9 +49,6 @@ set whichwrap=bs<>[]
 
 " Make backspace not terrible
 set backspace=indent,eol,start
-
-" no fold column
-let g:pandoc#folding#fdc=0
 
 " remember last cursor position
 autocmd BufReadPost *
@@ -78,6 +76,10 @@ imap <C-l> <C-g>u<Esc>[s1z=`]A<C-g>u
 " Dev Setup "
 """""""""""""
 
+" open error window on make
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+
 " look up recursively for a tags file
 set tags=tags,./tags;/
 
@@ -90,15 +92,19 @@ vmap <CR> <Plug>(EasyAlign)
 
 " pandoc
 let g:pandoc#syntax#style#emphases=0
+" no fold column
+let g:pandoc#folding#fdc=0
+" no pandoc conceal
+let g:pandoc#syntax#conceal#use=0
 
 "" latex-suite ""
 
 let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*'
+let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 --interaction=nonstopmode $*'
 let g:Tex_ViewRule_pdf = 'Skim'
 
 " create align* mapping after startup
-au VimEnter call IMAP('EAL', "\\begin{align*}\<CR>\<CR>\\end{align*}", 'tex')
+au VimEnter * call IMAP('EAL', "\\begin{align*}\<CR><++>\<CR>\\end{align*}<++>", 'tex')
 
 " compile on write
 au BufWritePost *.tex silent call Tex_RunLaTeX()
@@ -106,9 +112,6 @@ au BufWritePost *.tex silent call Tex_RunLaTeX()
 "" haskell ""
 
 let g:haskell_autotags=1
-
-
-
 
 """""""""""""
 " Searching "
@@ -133,7 +136,8 @@ set autoindent copyindent smartindent
 
 syntax enable
 colorscheme solarized
-set background=dark
+set bg=light
+set cursorline
 
 """"""""
 " GVim "
@@ -141,8 +145,6 @@ set background=dark
 
 if has('gui_running')
     set gcr=n:blinkon0 guioptions-=m guifont=Monaco:h11 
-    set background=light
-    set cursorline
 endif
 
 """""""""""""""""""""
@@ -154,6 +156,10 @@ au FileType {markdown,text,tex} setlocal spell
 
 " smaller indent in haskell
 au FileType haskell setlocal shiftwidth=2 tabstop=2
+
+" smaller indent in ocaml
+au FileType ocaml setlocal shiftwidth=2 tabstop=2
+autocmd FileType ocaml set commentstring=(\*\ %s\ \*)
 
 " Add json syntax highlighting
 au BufNewFile,BufRead *.json set ft=json syntax=javascript

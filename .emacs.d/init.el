@@ -1,32 +1,29 @@
 ;;; max's emacs.d 
 
-;; melpa
-(require 'package)
-(add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; package management
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
 (package-initialize)
 
 ;; a bunch of quick one line fixes
+(setq inhibit-splash-screen t)        
+(setq initial-scratch-message "")
 (tool-bar-mode -1)                    ;; fix ui
-(scroll-bar-mode -1)
-(setq mouse-wheel-scroll-amount '(1)) ;; fix scroll
+(scroll-bar-mode -1)                  ;; fix scroll
+(setq mouse-wheel-scroll-amount '(1)) 
 (setq mouse-wheel-progressive-speed nil)
 (pending-delete-mode t)               ;; type over region 
 (winner-mode 1)                       ;; undo window changes
-(setq exec-path (cons "/usr/local/bin/" exec-path))
 (global-auto-revert-mode 1)
 (setq-default indent-tabs-mode nil)
 (column-number-mode t)
 (toggle-uniquify-buffer-names t)
-(setq mac-command-modifier 'meta)
 (load-theme 'misterioso t)
 (setq ispell-program-name "aspell")
 (setq default-directory "~")
 (global-visual-line-mode 1)
-
-;; init setup
-(setq inhibit-splash-screen t)
-(setq initial-scratch-message "")
 
 ;; setup PATH
 (let ((path-from-shell
@@ -79,4 +76,4 @@
 ;; option -b highlights the current line; option -g opens Skim in the background  
 (setq TeX-view-program-selection '((output-pdf "Skim")))
 (setq TeX-view-program-list
-     '(("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+      '(("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
