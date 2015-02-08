@@ -62,6 +62,10 @@ set wrap linebreak
 " enable completion
 set omnifunc=syntaxcomplete#Complete
 
+" highlight lines over 80 characters
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
 """""""""""""
 " Shortcuts "
 """""""""""""
@@ -126,16 +130,15 @@ nnoremap <CR> :nohlsearch<CR>
 """""""""""""
 " Indenting "
 """""""""""""
-
-set tabstop=4 shiftwidth=4 expandtab
-set autoindent copyindent smartindent
+filetype plugin indent on
+set tabstop=4 shiftwidth=4 expandtab autoindent 
 
 """""""""
 " Theme "
 """""""""
 
 syntax enable
-colorscheme solarized
+" colorscheme solarized
 set bg=light
 set cursorline
 
