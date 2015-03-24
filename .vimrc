@@ -16,7 +16,6 @@ try
     " let Vundle manage Vundle, required
     Plugin 'gmarik/vundle'
 
-    Plugin 'altercation/vim-colors-solarized'
     Plugin 'junegunn/vim-easy-align'
     Plugin 'tpope/vim-commentary'
     Plugin 'vim-pandoc/vim-pandoc'
@@ -31,9 +30,14 @@ try
     call vundle#end() 
     filetype plugin indent on 
 catch
-    echom "Something went wrong with Vundle, it probably doesn't exist. Run this: "
-    echom "git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
-    echom "vim +PluginInstall +qall"
+    echom "Something went wrong with Vundle, it probably doesn't exist."
+    if confirm("Should we try to fix it?", "n\ny") == 2
+        !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
+        echom "Vundle installed, run PluginInstall in vim to update plugins"
+        qall
+    else
+        echom "ok we won't fix it"
+    endif
 endtry
 
 """"""
@@ -63,6 +67,10 @@ set wrap linebreak
 
 " enable completion
 set omnifunc=syntaxcomplete#Complete
+
+" highlight lines over 80 characters
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
 
 """""""""""""
 " Shortcuts "
@@ -144,16 +152,14 @@ nnoremap <CR> :nohlsearch<CR>
 """""""""""""
 " Indenting "
 """""""""""""
-
-set tabstop=4 shiftwidth=4 expandtab
-set autoindent copyindent smartindent
+filetype plugin indent on
+set tabstop=4 shiftwidth=4 expandtab autoindent 
 
 """""""""
 " Theme "
 """""""""
 
 syntax enable
-colorscheme solarized
 set bg=light
 set cursorline
 
@@ -184,3 +190,4 @@ au BufNewFile,BufRead *.json set ft=json syntax=javascript
 
 " Add markdown syntax highlighting
 au BufNewFile,BufRead *.md set ft=markdown 
+
