@@ -61,8 +61,8 @@ set wrap linebreak
 set omnifunc=syntaxcomplete#Complete
 
 " highlight lines over 80 characters
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+highlight LongLines ctermbg=red ctermfg=white guibg=#592929
+match LongLines /\%81v.\+/
 
 """""""""""""
 " Shortcuts "
