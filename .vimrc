@@ -25,6 +25,8 @@ try
     Plugin 'dag/vim2hs'
     Plugin 'rking/ag.vim'
     Plugin 'wting/rust.vim'
+    Plugin 'kana/vim-textobj-user'
+    Plugin 'roman/golden-ratio'
 
     call vundle#end() 
     filetype plugin indent on 
@@ -90,14 +92,14 @@ set tags=tags,./tags;/
 " easy-align in visual mode
 vmap <CR> <Plug>(EasyAlign)
 
-" pandoc
+""" pandoc
 let g:pandoc#syntax#style#emphases=0
 " no fold column
 let g:pandoc#folding#fdc=0
 " no pandoc conceal
 let g:pandoc#syntax#conceal#use=0
 
-"" latex-suite ""
+""" latex-suite
 
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 --interaction=nonstopmode $*'
@@ -109,9 +111,25 @@ au VimEnter * call IMAP('EAL', "\\begin{align*}\<CR><++>\<CR>\\end{align*}<++>",
 " compile on write
 au BufWritePost *.tex silent call Tex_RunLaTeX()
 
-"" haskell ""
-
+""" haskell
 let g:haskell_autotags=1
+
+""" textobj-user
+call textobj#user#plugin('latex', {
+\   'environment': {
+\     'pattern': ['\\begin{[^}]*}', '\\end{[^}]*}'],
+\     'select-a': 'ae',
+\     'select-i': 'ie',
+\   },
+\  'dollar-math-a': {
+\     '*pattern*': '[$][^$]*[$]',
+\     'select': 'a$',
+\   },
+\  'dollar-math-i': {
+\     '*pattern*': '[$]\zs[^$]*\ze[$]',
+\     'select': 'i$',
+\   },
+\ })
 
 """""""""""""
 " Searching "
