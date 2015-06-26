@@ -62,15 +62,16 @@ autocmd BufReadPost *
 	\ 	exe "normal g`\"" |
 	\ endif
 
-" proper word wrapping
+" proper word wrapping 
 set wrap linebreak
 
 " enable completion
 set omnifunc=syntaxcomplete#Complete
 
-" highlight lines over 80 characters
+" highlight lines over 80 characters and dont type them in the first place
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
+set textwidth=80
 
 """""""""""""
 " Shortcuts "
