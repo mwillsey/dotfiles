@@ -5,3 +5,8 @@
 !.vim/bundle/Vundle.vim
 !.vim/bundle/Vundle.vim/*
 
+# ignore elpa
+.emacs.d/elpa
+
+# ignore emacs saves
+
