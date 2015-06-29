@@ -22,7 +22,8 @@
     (use-package evil-commentary
       :ensure t
       :config
-        (evil-commentary-mode)))
+      (evil-commentary-mode))
+    (define-key evil-visual-state-map (kbd "RET") 'align-regexp))
 
 (use-package org
   ;; org is an organizational suite
