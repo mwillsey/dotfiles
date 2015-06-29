@@ -54,6 +54,10 @@
   (setq guide-key/guide-key-sequence t)
   (guide-key-mode 1))
 
+(use-package tuareg-mode
+  ;; tuareg is an ocaml editing mode
+  :ensure tuareg)
+
 ;; a bunch of quick one line fixes
 (setq inhibit-splash-screen t)        
 (setq initial-scratch-message "")
