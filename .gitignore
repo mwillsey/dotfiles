@@ -5,9 +5,10 @@
 !.vim/bundle/Vundle.vim
 !.vim/bundle/Vundle.vim/*
 
-# ignore elpa
+# ignore emacs stuff
 .emacs.d/elpa
 .emacs.d/auto-save-list/
+.emacs.d/ido.last
 
 # ignore emacs saves
 

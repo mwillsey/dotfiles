@@ -15,6 +15,7 @@
 
 
 (use-package evil
+  ;; evil provides vim-like interaction with emacs
   :ensure t
   :config 
     (evil-mode 1)
@@ -24,9 +25,16 @@
         (evil-commentary-mode)))
 
 (use-package org
+  ;; org is an organizational suite
   :ensure t)
 
+(use-package flyspell
+  :config
+  (add-hook 'org-mode-hook 'turn-on-flyspell)
+  (setq ispell-program-name "aspell"))
+
 (use-package writeroom-mode
+  ;; writeroom-mode starts a distraction-free writing enviroment
   :ensure t
   :config 
   (setq writeroom-global-effects '(writeroom-toggle-alpha
@@ -38,6 +46,13 @@
         writeroom-maximize-window nil
         writeroom-fringes-outside-margins nil))
 
+(use-package guide-key
+  ;; guide-key pops up keybindings once you've started a command
+  :ensure t
+  :config
+  (setq guide-key/guide-key-sequence t)
+  (guide-key-mode 1))
+
 ;; a bunch of quick one line fixes
 (setq inhibit-splash-screen t)        
 (setq initial-scratch-message "")
@@ -46,8 +61,7 @@
 (global-auto-revert-mode 1)
 (setq-default indent-tabs-mode nil)
 (column-number-mode t)
-(load-theme 'misterioso t)
-(setq ispell-program-name "aspell")
+(load-theme 'tango t)
 (setq default-directory "~")
 (global-visual-line-mode 1)
 
