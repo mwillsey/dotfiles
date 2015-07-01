@@ -72,6 +72,7 @@
 (column-number-mode t)
 (load-theme 'whiteboard t)
 (setq default-directory "~")
+(setq global-visual-line-mode 1)
 
 ;; mac setup
 (setq mac-command-modifier 'meta)
