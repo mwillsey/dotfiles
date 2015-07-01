@@ -73,8 +73,11 @@
 (load-theme 'whiteboard t)
 (setq default-directory "~")
 
-;; ;; scrolling
-;; (setq scroll-step 1)
+;; mac setup
+(setq mac-command-modifier 'meta)
+
+;; scrolling
+(setq scroll-step 1)
 (setq mouse-wheel-scroll-amount '(2))
 (setq mouse-wheel-progressive-speed nil)
 
