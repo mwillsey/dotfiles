@@ -21,11 +21,13 @@
   :diminish undo-tree-mode
   :config 
     (evil-mode 1)
+    (define-key evil-ex-map "e " 'ido-find-file)
+    (define-key evil-ex-map "b " 'ido-switch-buffer)
+    (define-key evil-visual-state-map (kbd "RET") 'align-regexp)
     (use-package evil-commentary
       :ensure t
       :diminish evil-commentary-mode
-      :config (evil-commentary-mode))
-    (define-key evil-visual-state-map (kbd "RET") 'align-regexp))
+      :config (evil-commentary-mode)))
 
 
 (use-package org
@@ -63,8 +65,8 @@
   :ensure tuareg)
 
 ;; a bunch of quick one line fixes
-(setq inhibit-splash-screen t)        
-(setq initial-scratch-message "")
+(setq inhibit-splash-screen t        
+      initial-scratch-message "")
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (global-auto-revert-mode 1)
@@ -75,12 +77,13 @@
 (setq global-visual-line-mode 1)
 
 ;; mac setup
-(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super
+      mac-command-modifier 'meta)
 
 ;; scrolling
-(setq scroll-step 1)
-(setq mouse-wheel-scroll-amount '(2))
-(setq mouse-wheel-progressive-speed nil)
+(setq scroll-step 1
+      mouse-wheel-scroll-amount '(2)
+      mouse-wheel-progressive-speed nil)
 
 ;; show matching parens
 (show-paren-mode 1)
@@ -88,7 +91,21 @@
 ;; centralized backups
 (setq backup-directory-alist `(("." . "~/.emacs.saves")))
 
-;; ido mode
-(ido-mode 1) 
-(define-key evil-ex-map "e " 'ido-find-file)
-(define-key evil-ex-map "b " 'ido-switch-buffer)
+(use-package ido
+  ;; ido mode
+  :config 
+  (ido-mode 1))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (writeroom-mode use-package tuareg guide-key evil-commentary))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
