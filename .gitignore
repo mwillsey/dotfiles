@@ -12,4 +12,6 @@
 .emacs.d/abbrev_defs
 
 # ignore emacs saves
+*~
+\#*\#
 
