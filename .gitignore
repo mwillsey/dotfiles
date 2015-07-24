@@ -6,10 +6,7 @@
 !.vim/bundle/Vundle.vim/*
 
 # ignore emacs stuff
-.emacs.d/elpa
-.emacs.d/auto-save-list/
-.emacs.d/ido.last
-.emacs.d/abbrev_defs
+.emacs.d/*
 
 # ignore emacs saves
 *~
