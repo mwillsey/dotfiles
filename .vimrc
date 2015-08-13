@@ -26,6 +26,9 @@ try
     Plugin 'wting/rust.vim'
     Plugin 'kana/vim-textobj-user'
     Plugin 'roman/golden-ratio'
+    Plugin 'lambdatoast/elm.vim'
+    Plugin 'jceb/vim-orgmode'
+    Plugin 'tpope/vim-speeddating'
 
     call vundle#end() 
     filetype plugin indent on 
