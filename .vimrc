@@ -7,7 +7,7 @@
 set nocompatible
 set shell=bash
 
-try
+function SetupVundle()
     filetype off                
 
     " set the runtime path to include Vundle and initialize
@@ -26,12 +26,17 @@ try
 
     call vundle#end() 
     filetype plugin indent on 
+endfunction
+
+try
+    call SetupVundle()
 catch
     echom "Something went wrong with Vundle, it probably doesn't exist."
     if confirm("Should we try to fix it?", "n\ny") == 2
         !mkdir -p ~/.vim/bundle
-        !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle PluginInstall
-        qall
+        !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
+        call SetupVundle()
+        PluginInstall
     else
         echom "ok we won't fix it"
     endif
@@ -121,9 +126,6 @@ au VimEnter * call IMAP('EAL', "\\begin{align*}\<CR><++>\<CR>\\end{align*}<++>",
 
 " compile on write
 au BufWritePost *.tex silent call Tex_RunLaTeX()
-
-""" haskell
-let g:haskell_autotags=1
 
 """ textobj-user
 call textobj#user#plugin('latex', {

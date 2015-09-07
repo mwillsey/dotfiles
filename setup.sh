@@ -5,25 +5,21 @@ cd $(dirname $0)
 THISDIR=$(pwd)
 
 echo
-echo "Creating directory structure"
+echo "Use 'y' to confirm an action, nothing to skip, and Ctrl-C to abort."
 echo
 
-find . -type d -mindepth 1\
+find . -mindepth 1 -type d\
     -not -path "*.git*"\
-    -exec echo "mkdir -p ~/{}" \;\
-    -exec mkdir -p ~/{} \;
+    -ok mkdir -p ~/{} \;
 
 echo
-echo "Any key to confirm symlink creation; Ctrl-C to abort."
-echo
 
-find . -type f -mindepth 1\
+find . -mindepth 1 -type f\
     -not -path "*.git*"\
     -not -name "README.md"\
     -not -name "setup.sh"\
     -not -name "*.swp"\
     -not -name "*.swo"\
-    -exec read -p "Confirm 'ln -s $THISDIR/{} ~/{}':" \;\
-    -exec ln -s $THISDIR/{} ~/{} \;
+    -ok ln -s $THISDIR/{} ~/{} \;
 
 
