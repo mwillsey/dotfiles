@@ -1,24 +1,29 @@
 #!/bin/sh
+# setup the dotfiles
 
-BASEDIR=~/dotfiles
-# sets up the symlinks
+cd $(dirname $0)
+THISDIR=$(pwd)
 
-# vim
-FILES="
-.vim
-.vimrc
-.emacs.d
-.zshrc
-.tmux.conf
-"
+echo
+echo "Creating directory structure"
+echo
 
-for file in $FILES
-do
-    if [ -e ~/$file ]
-    then
-        echo "~/$file exists, not creating link..."
-    else
-        ln -s $BASEDIR/$file ~/$file
-        echo "created link ~/$file -> $BASEDIR/$file"
-    fi
-done
+find . -type d -mindepth 1\
+    -not -path "*.git*"\
+    -exec echo "mkdir -p ~/{}" \;\
+    -exec mkdir -p ~/{} \;
+
+echo
+echo "Any key to confirm symlink creation; Ctrl-C to abort."
+echo
+
+find . -type f -mindepth 1\
+    -not -path "*.git*"\
+    -not -name "README.md"\
+    -not -name "setup.sh"\
+    -not -name "*.swp"\
+    -not -name "*.swo"\
+    -exec read -p "Confirm 'ln -s $THISDIR/{} ~/{}':" \;\
+    -exec ln -s $THISDIR/{} ~/{} \;
+
+

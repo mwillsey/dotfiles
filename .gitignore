@@ -1,14 +1,4 @@
-# ignore the .vim folder, except include Vundle
-.vim/*
-!.vim/bundle
-.vim/bundle/*
-!.vim/bundle/Vundle.vim
-!.vim/bundle/Vundle.vim/*
-
-# ignore emacs stuff
-.emacs.d/*
-
-# ignore emacs saves
-*~
-\#*\#
+# ignore the vim stuff
+*.swp
+*.swo
 
