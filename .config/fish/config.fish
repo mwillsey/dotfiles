@@ -12,6 +12,13 @@ switch (uname)
         set -x EDITOR "vim"
 end
 
+# for tmux/screen specific things
+switch $TERM
+    case "screen*"
+        set -g __fish_in_screen true
+end
+    
+
 # easy aliases
 alias l "ls -lah"
 
