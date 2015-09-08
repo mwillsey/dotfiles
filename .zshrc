@@ -1,5 +1,11 @@
 ## max's .zshrc
 
+# source local config if present
+if [[ -f ~/.zshrc.local ]]; then
+    echo "I found a sourced a '.zshrc.local' file!"
+    source ~/.zshrc.local
+fi
+
 # basic config 
 HISTFILE=~/.histfile
 HISTSIZE=1000
