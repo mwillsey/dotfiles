@@ -9,9 +9,10 @@ bindkey -e
 KEYTIMEOUT=1
 
 # aliases
-if [[ $(uname) == Linux ]]; then
-    alias ls='ls --color=auto'
-fi
+case `uname` in
+    Darwin) alias ls='ls -FG' ;;
+    Linux)  alias ls='ls -F --color=auto' ;;
+esac
 alias l='ls -lah'
 
 # enviroment variables
