@@ -5,7 +5,6 @@
 """"""""""
 
 set nocompatible
-set shell=bash
 
 function SetupVundle()
     filetype off                
