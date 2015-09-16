@@ -21,8 +21,13 @@ export LS_COLORS="di=1;36:ln=1;35:so=1;32:pi=1;33:ex=1;\
 
 # aliases
 case `uname` in
-    Darwin) alias ls='ls -FG' ;;
-    Linux)  alias ls='ls -F --color=auto' ;;
+    Darwin) 
+        alias ls='ls -FG' 
+        alias vim='mvim -v'
+        ;;
+    Linux)  
+        alias ls='ls -F --color=auto' 
+        ;;
 esac
 alias l='ls -lah'
 
@@ -36,7 +41,6 @@ zstyle ':completion:*' insert-tab false
 # zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
 setopt completeinword
-setopt menucomplete
 compinit
 
 # initialize colors
