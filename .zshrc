@@ -50,7 +50,7 @@ autoload -U colors
 colors
 
 # simple prompt
-PROMPT="> "
+PROMPT="%{$fg_bold[green]%}>%{$reset_color%} "
 
 # dont exit if in tmux or screen
 if [[ $TERM =~ "screen" ]]; then
