@@ -60,7 +60,7 @@ function () {
         host="%{$fg_bold[red]%}%u@" # unexpected user
     fi
 
-    local dir="%{$fg_bold[green]%}%(3~,…/,)%2~"
+    local dir="%{$fg[green]%}%(3~,…/,)%2~"
 
     local char_color="%(?,$fg_bold[green],$fg_bold[red])"
     local char="%{$char_color%}➜%{$reset_color%}"
