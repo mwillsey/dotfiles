@@ -66,6 +66,9 @@ autocmd BufReadPost *
 " proper word wrapping 
 set wrap linebreak
 
+" less distracting fold
+set fillchars="vert:|,fold: "
+
 " enable completion
 set omnifunc=syntaxcomplete#Complete
 
@@ -104,12 +107,12 @@ vmap <CR> <Plug>(EasyAlign)
 
 """ latex-suite
 
+let g:Tex_FoldedSections = "question,part,chapter,section,%%fakesection"
+                         \ "subsection,subsubsection,paragraph"
+let g:Tex_FoldedMisc = "preamble,<<<"
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 --interaction=nonstopmode $*'
 let g:Tex_ViewRule_pdf = 'Skim'
-
-" create align* mapping after startup
-au VimEnter *.tex call IMAP('EAL', "\\begin{align*}\<CR><++>\<CR>\\end{align*}<++>", 'tex')
 
 " compile on write
 au BufWritePost *.tex silent call Tex_RunLaTeX()
@@ -153,14 +156,18 @@ set tabstop=4 shiftwidth=4 expandtab autoindent
 
 syntax enable
 set bg=light
-set cursorline
 
-""""""""
-" GVim "
-""""""""
+"""""""""""""""""""""""""
+" GUI/Terminal Specific "
+"""""""""""""""""""""""""
 
 if has('gui_running')
     set gcr=n:blinkon0 guioptions-=m guifont=Menlo:h12
+    set cursorline
+else
+    hi clear SpellBad
+    hi SpellBad cterm=underline
+    hi clear Folded
 endif
 
 """""""""""""""""""""
