@@ -24,7 +24,6 @@ function SetupVundle()
     Plugin 'roman/golden-ratio'
 
     call vundle#end() 
-    filetype plugin indent on 
 endfunction
 
 try
@@ -46,6 +45,7 @@ endtry
 """"""
 
 " basic stuff
+filetype plugin indent on 
 set autoread title encoding=utf-8 showcmd mouse=a ruler laststatus=2 ttyfast
 
 " ignore whitespace in diff mode
@@ -69,22 +69,10 @@ set wrap linebreak
 " enable completion
 set omnifunc=syntaxcomplete#Complete
 
-" scrolling speed = 2 in terminal
-if has("gui_running")
-else
-    nnoremap <ScrollWheelUp>   <C-Y> <C-Y>
-    nnoremap <ScrollWheelDown> <C-E> <C-E>
-    inoremap <ScrollWheelUp>   <C-Y> <C-Y>
-    inoremap <ScrollWheelDown> <C-E> <C-E>
-    vnoremap <ScrollWheelUp>   <C-Y> <C-Y>
-    vnoremap <ScrollWheelDown> <C-E> <C-E>
-endif
-
-
 " highlight lines over 80 characters and dont type them in the first place
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
-set textwidth=80
+match OverLength /\%80v.\+/
+set textwidth=79
 
 """""""""""""
 " Shortcuts "
@@ -121,7 +109,7 @@ let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 --interaction=nonstopmode $*'
 let g:Tex_ViewRule_pdf = 'Skim'
 
 " create align* mapping after startup
-au VimEnter * call IMAP('EAL', "\\begin{align*}\<CR><++>\<CR>\\end{align*}<++>", 'tex')
+au VimEnter *.tex call IMAP('EAL', "\\begin{align*}\<CR><++>\<CR>\\end{align*}<++>", 'tex')
 
 " compile on write
 au BufWritePost *.tex silent call Tex_RunLaTeX()
@@ -172,7 +160,7 @@ set cursorline
 """"""""
 
 if has('gui_running')
-    set gcr=n:blinkon0 guioptions-=m guifont=Monaco:h11 
+    set gcr=n:blinkon0 guioptions-=m guifont=Menlo:h12
 endif
 
 """""""""""""""""""""
@@ -189,9 +177,25 @@ au FileType haskell setlocal shiftwidth=2 tabstop=2
 au FileType ocaml setlocal shiftwidth=2 tabstop=2
 autocmd FileType ocaml set commentstring=(\*\ %s\ \*)
 
-" Add json syntax highlighting
+" recognize json as javascript
 au BufNewFile,BufRead *.json set ft=json syntax=javascript
 
-" Add markdown syntax highlighting
+" recognize md as markdown
 au BufNewFile,BufRead *.md set ft=markdown 
 
+" recognize sig as sml
+au BufNewFile,BufRead *.sig set ft=sml 
+
+" sml compiler
+function SetupSML()
+    setlocal commentstring=(*\ %s\ *)
+    let sml_errorformat=
+                \ '%E%f:%l%\%.%c %trror: %m,' .
+                \ '%E%f:%l%\%.%c-%\d%\+%\%.%\d%\+ %trror: %m,' .
+                \ '%W%f:%l%\%.%c %tarning: %m,' .
+                \ '%W%f:%l%\%.%c-%\d%\+%\%.%\d%\+ %tarning: %m,' .
+                \ '%E raised at %f:%l%\%.%c-%\d%\+%\%.%\d%\+'
+    let &errorformat=sml_errorformat
+    set makeprg=echo\ \\\|\ sml\ sources.cm\ $*
+endfunction
+au FileType sml call SetupSML()
