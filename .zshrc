@@ -36,8 +36,10 @@ export EDITOR=vim
 
 # completion
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# blank to prefer exact matching first
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z} r:|[._-]=* r:|=* l:|=* r:|=*'
 zstyle ':completion:*' insert-tab false
+zstyle ':completion:*' menu select
 # zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
 setopt completeinword
@@ -72,7 +74,7 @@ echo ""
 # edit command line
 autoload -U edit-command-line
 zle -N edit-command-line
-bindkey "\e" edit-command-line
+bindkey "^x^e" edit-command-line
 
 # empty command runs my-status
 function my-accept-line() {
