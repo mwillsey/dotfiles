@@ -49,20 +49,29 @@ compinit
 autoload -U colors
 colors
 
-# simple prompt
-PROMPT="%{$fg_bold[green]%}>%{$reset_color%} "
+# start at home
+cd $HOME
+
+# set prompt
+function () {
+
+    local host="%m"
+    if [[ $USER != "mwillsey" && $USER != "hwillsey" ]]; then
+        host="%{$fg_bold[red]%}%u@" # unexpected user
+    fi
+
+    local dir="%{$fg_bold[green]%}%(3~,…/,)%2~"
+
+    local char_color="%(?,$fg_bold[green],$fg_bold[red])"
+    local char="%{$char_color%}➜%{$reset_color%}"
+
+    PROMPT="$host $dir $char "
+}
 
 # dont exit if in tmux or screen
 if [[ $TERM =~ "screen" ]]; then
     setopt ignoreeof
 fi
-
-# status function
-function my-status() {
-    local you="$USER@$HOST"
-    local dir="$fg_bold[green]${$(pwd)/#$HOME/~}$reset_color"
-    echo -n "$you $dir"
-}
 
 # welcome
 echo ""
@@ -75,21 +84,4 @@ echo ""
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey "^x^e" edit-command-line
-
-# empty command runs my-status
-function my-accept-line() {
-    zle accept-line
-    if [[ -z $BUFFER ]]; then
-        echo
-        my-status
-    fi
-}
-zle -N my-accept-line
-bindkey "^M" my-accept-line
-
-# changing dirs runs my-status
-function chpwd() {
-    my-status
-    echo
-}
 
