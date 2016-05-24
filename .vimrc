@@ -18,10 +18,12 @@ function SetupVundle()
 
     Plugin 'junegunn/vim-easy-align'
     Plugin 'tpope/vim-commentary'
-    Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
+    " Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
+    Plugin 'lervag/vimtex'
     Plugin 'rking/ag.vim'
-    Plugin 'kana/vim-textobj-user'
-    Plugin 'roman/golden-ratio'
+    " Plugin 'kana/vim-textobj-user'
+    " Plugin 'roman/golden-ratio'
+    " Plugin 'fatih/vim-go'
 
     call vundle#end() 
 endfunction
@@ -46,7 +48,17 @@ endtry
 
 " basic stuff
 filetype plugin indent on 
-set autoread title encoding=utf-8 showcmd mouse=a ruler laststatus=2 ttyfast
+set autoread title encoding=utf-8 showcmd ruler laststatus=2 ttyfast
+
+" leaders
+let mapleader = " "
+let maplocalleader = ","
+
+" make the mouse work in terminal
+set mouse=a
+if &term =~ '^screen'
+    set ttymouse=xterm2 " tmux knows the extended mouse mode
+endif
 
 " ignore whitespace in diff mode
 set diffopt+=iwhite
@@ -66,8 +78,9 @@ autocmd BufReadPost *
 " proper word wrapping 
 set wrap linebreak
 
-" less distracting fold
+" less distracting fold, not by default
 set fillchars="vert:|,fold: "
+set foldlevelstart=5
 
 " enable completion
 set omnifunc=syntaxcomplete#Complete
@@ -104,35 +117,41 @@ set tags=tags,./tags;/
 
 " easy-align in visual mode
 vmap <CR> <Plug>(EasyAlign)
+" align in strings and comments
+let g:easy_align_ignore_groups = []
 
 """ latex-suite
 
-let g:Tex_FoldedSections = "question,part,chapter,section,%%fakesection"
-                         \ "subsection,subsubsection,paragraph"
-let g:Tex_FoldedMisc = "preamble,<<<"
-let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 --interaction=nonstopmode $*'
-let g:Tex_ViewRule_pdf = 'Skim'
+" let g:Tex_FoldedSections = "question,part,chapter,section,%%fakesection"
+"                          \ "subsection,subsubsection,paragraph"
+" let g:Tex_FoldedMisc = "preamble,<<<"
+" let g:Tex_DefaultTargetFormat = 'pdf'
+" let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 --interaction=nonstopmode $*'
+" let g:Tex_CompileRule_pdf = 'rubber --pdf $*'
 
-" compile on write
-au BufWritePost *.tex silent call Tex_RunLaTeX()
+" let g:Tex_ViewRule_pdf = 'Skim'
+" let g:Tex_ViewRule_pdf = 'open -ga Preview'
 
-""" textobj-user
-call textobj#user#plugin('latex', {
-\   'environment': {
-\     'pattern': ['\\begin{[^}]*}', '\\end{[^}]*}'],
-\     'select-a': 'ae',
-\     'select-i': 'ie',
-\   },
-\  'dollar-math-a': {
-\     '*pattern*': '[$][^$]*[$]',
-\     'select': 'a$',
-\   },
-\  'dollar-math-i': {
-\     '*pattern*': '[$]\zs[^$]*\ze[$]',
-\     'select': 'i$',
-\   },
-\ })
+" compile and view on write
+" au BufWritePost *.tex silent call Tex_RunLaTeX() 
+" au BufWritePost *.tex silent call Tex_ViewLaTeX()
+
+" """ textobj-user
+" call textobj#user#plugin('latex', {
+" \   'environment': {
+" \     'pattern': ['\\begin{[^}]*}', '\\end{[^}]*}'],
+" \     'select-a': 'ae',
+" \     'select-i': 'ie',
+" \   },
+" \  'dollar-math-a': {
+" \     '*pattern*': '[$][^$]*[$]',
+" \     'select': 'a$',
+" \   },
+" \  'dollar-math-i': {
+" \     '*pattern*': '[$]\zs[^$]*\ze[$]',
+" \     'select': 'i$',
+" \   },
+" \ })
 
 """""""""""""
 " Searching "
@@ -155,19 +174,21 @@ set tabstop=4 shiftwidth=4 expandtab autoindent
 """""""""
 
 syntax enable
-set bg=light
+
+" set bg=light
+set cursorline
+
+" hi SpellBad cterm=underline ctermbg=NONE
+" hi clear Folded
+" hi Visual ctermbg=250 cterm=NONE
+" hi CursorLine cterm=NONE ctermbg=254
 
 """""""""""""""""""""""""
 " GUI/Terminal Specific "
 """""""""""""""""""""""""
 
 if has('gui_running')
-    set gcr=n:blinkon0 guioptions-=m guifont=Menlo:h12
-    set cursorline
-else
-    hi clear SpellBad
-    hi SpellBad cterm=underline
-    hi clear Folded
+    set gcr=n:blinkon0 guioptions-=m guifont=Incosolata:h13
 endif
 
 """""""""""""""""""""
@@ -203,6 +224,7 @@ function SetupSML()
                 \ '%W%f:%l%\%.%c-%\d%\+%\%.%\d%\+ %tarning: %m,' .
                 \ '%E raised at %f:%l%\%.%c-%\d%\+%\%.%\d%\+'
     let &errorformat=sml_errorformat
-    set makeprg=echo\ \\\|\ sml\ sources.cm\ $*
+    let &makeprg="echo 'CM.make \"sources.cm\";' \\| sml sources.cm $*"
+    " set makeprg=echo\ \'CM.make\ \"sources.cm\";\'\ \\\|\ sml\ sources.cm\ $*
 endfunction
 au FileType sml call SetupSML()
