@@ -1,0 +1,29 @@
+" Max's .vimrc
+
+" load pathogen and make it load everything else
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect()
+
+" vim-sensible takes care of most defaults
+" but these are just mine
+set linebreak
+set mouse=a
+nnoremap Y y$
+set hlsearch incsearch ignorecase smartcase gdefault
+
+" please don't tab
+set tabstop=4 shiftwidth=4 expandtab autoindent
+
+" emacs bindings in the commandline
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <M-b> <S-Left>
+cnoremap <M-f> <S-Right>
+set cedit=<Esc>
+
+" use spell checking in text-like files
+au FileType {markdown,text,tex} setlocal spell

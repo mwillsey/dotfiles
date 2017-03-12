@@ -1,4 +1,10 @@
 My dotfiles
 ===========
 
-Feel free to use them. Just run `setup.sh` to symlink everything to your home directory. Make sure to `git clone --recursive https://github.com/mwillsey/dotfiles` to pull down the plugins from their submodules.
+Feel free to use them.
+
+Use GNU `stow` to symlink to your home directory:
+```bash
+git clone --recursive git@github.com:mwillsey/dotfiles.git ~/dotfiles
+stow -d ~/dotfiles *
+```
