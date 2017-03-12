@@ -1,0 +1,9 @@
+[user]
+    name  = Max Willsey
+    email = me@mwillsey.com
+
+[core]
+    excludesfile = ~/.gitignore-global
+
+[push]
+    default = simple

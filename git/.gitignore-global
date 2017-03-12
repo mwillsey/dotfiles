@@ -1,0 +1,73 @@
+#######
+# TeX #
+#######
+*.aux_lock
+*.auxlock
+*.bbl
+*.blg
+*.bcf
+*.aux
+*.log
+*.toc
+*.lof
+*.lot
+*.lox
+*.synctex.gz
+*.upa
+*.upb
+*.fdb_latexmk
+*.fls
+*.pag
+*.auctex*
+_minted*
+
+############
+# Compiled #
+############
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+
+###########
+# Package #
+###########
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+########
+# Logs #
+########
+*.log
+*.sql
+*.sqlite
+
+#########
+# macOS #
+#########
+.DS_Store
+.DS_Store?
+._*
+Icon?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+###############
+# Development #
+###############
+.vagrant/
+TAGS
+GTAGS
+GPATH
+GRTAGS
