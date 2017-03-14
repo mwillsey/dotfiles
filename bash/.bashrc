@@ -1,7 +1,7 @@
 # Max's .bashrc on bicycle
 
-include () { 
-    for file in $@; do 
+function include () {
+    for file in $@; do
         [ -f "$file" ] && source "$file"
     done
 }
@@ -35,9 +35,14 @@ export STOW_DIR="$LOCAL/stow"
 # to avoid actually having local perl modules, I just point PERL5LIB to the
 # stow install so it can find its own perl module
 export PERL5LIB="$STOW_DIR/stow/share/perl5:$PERL5LIB"
-export PYTHONPATH="$LOCAL/lib/python2.7/site-packages:$PYTHONPATH"
+# export PYTHONPATH="$LOCAL/lib/python2.7/site-packages:$PYTHONPATH"
+export PYTHONUSERBASE=$LOCAL
 
 export EDITOR=vim
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+export GLOBIGNORE=".:.."
 
 # aliases and shortcuts
 alias l='ls -al'
+alias ec='emacsclient -t -a vim'
+alias xdg-open='client open'
