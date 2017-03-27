@@ -10,9 +10,17 @@
   (auto-fill-mode 1))
 
 ;; open things on the client side
-(setq org-file-apps '((auto-mode . emacs)
-                      ("\\.x?html?\\'" .  "client open %s")
-                      ("\\.pdf\\'"     .  "client open %s")))
+(case system-type
+  (darwin
+   (setq org-file-apps
+         '((auto-mode . emacs)
+           ("\\.x?html?\\'" .  "open %s")
+           ("\\.pdf\\'"     .  "open %s"))))
+  (otherwise
+   (setq org-file-apps
+         '((auto-mode . emacs)
+           ("\\.x?html?\\'" .  "client open %s")
+           ("\\.pdf\\'"     .  "client open %s")))))
 
 ;; put my stuff in the right location
 ;; disable archiving for now
@@ -29,8 +37,6 @@
       org-refile-use-outline-path 'file
       org-refile-targets '((org-agenda-files :maxlevel . 9)))
 
-;; TODO I could port org-mac-link to work on the server by using the "client" command
-;; It would involve some kind of advice to shell-command-to-string
 (require 'org-mac-link)
 (spacemacs/set-leader-keys-for-major-mode 'org-mode "ig" 'org-mac-grab-link)
 
@@ -48,7 +54,7 @@
       org-log-into-drawer t)
 
 (setq org-todo-keywords '((sequence
-                           "TODO(t@)" "NEXT(n!)" "HOLD(h@/!)"
+                           "TODO(t)" "NEXT(n!)" "HOLD(h@/!)"
                            "|"
                            "DONE(d!)" "DROP(c@/!)")
                           (type "MEETING(m)"))

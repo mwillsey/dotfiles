@@ -1,7 +1,11 @@
 ;; -*- mode: emacs-lisp -*-
 ;; This file is loaded by Spacemacs at startup.
 
-(defconst mw/directory "~")
+(defconst mw/directory
+  (expand-file-name
+   (if (eq system-type 'darwin)
+     "~/Dropbox" "~")))
+
 (defun mw/dir (&rest paths)
   (mapconcat 'identity (cons mw/directory paths) "/"))
 
@@ -146,7 +150,7 @@ values."
    dotspacemacs-smartparens-strict-mode nil
    dotspacemacs-smart-closing-parenthesis t
    dotspacemacs-highlight-delimiters 'all
-   dotspacemacs-persistent-server t
+   dotspacemacs-persistent-server nil
    dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
    dotspacemacs-default-package-repository nil
    dotspacemacs-whitespace-cleanup 'trailing
@@ -174,8 +178,9 @@ values."
   (setq helm-echo-input-in-header-line nil)
 
   ; spacemacs commented this out for now
-  (spacemacs-evil/init-evil-terminal-cursor-changer)
-  (evil-terminal-cursor-changer-activate)
+  (unless (display-graphic-p)
+    (spacemacs-evil/init-evil-terminal-cursor-changer)
+    (evil-terminal-cursor-changer-activate))
 
   (setq powerline-default-separator 'bar)
   (spaceline-compile)
@@ -194,9 +199,13 @@ values."
 
   ;; browse URLs (including mail) externally
   (setq browse-url-mailto-function  'browse-url-generic
-        browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "client"
-        browse-url-generic-args '("open"))
+        browse-url-browser-function 'browse-url-generic)
+  (case system-type
+    (darwin
+     (setq browse-url-generic-program "open"))
+    (otherwise
+     (setq browse-url-generic-program "client"
+           browse-url-generic-args '("open"))))
 
   (setq mouse-wheel-scroll-amount '(2 ((shift) . 5))
         mouse-wheel-progressive-speed nil)
@@ -218,9 +227,14 @@ values."
     (setq TeX-engine 'xetex
           TeX-view-program-selection '((output-dvi "open")
                                        (output-pdf "displayline")
-                                       (output-html "open"))
-          TeX-view-program-list '(("open" "client open %o")
-                                  ("displayline" "client 'displayline -b -g %n' %o %b")))
+                                       (output-html "open")))
+    (case system-type
+      (darwin
+       (setq TeX-view-program-list '(("open" "open %o")
+                                     ("displayline" "displayline -b -g %n %o %b"))))
+      (otherwise
+       (setq TeX-view-program-list '(("open" "client open %o")
+                                     ("displayline" "client 'displayline -b -g %n' %o %b")))))
 
     (add-to-list 'LaTeX-verbatim-macros-with-delims "lstinline")
 
@@ -261,7 +275,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (evil-terminal-cursor-changer powerline faceup spinner org org-plus-contrib hydra parent-mode request haml-mode gitignore-mode gh marshal logito pcache ht flyspell-correct flx magit-popup with-editor iedit anzu company yasnippet pkg-info epl bind-map biblio-core packed pythonic f dash s avy popup package-build auctex-latexmk smartparens projectile web-mode use-package srefactor shell-pop restart-emacs pyvenv persp-mode org-ref ivy mmm-mode markdown-toc live-py-mode info+ indent-guide hide-comnt help-fns+ helm-bibtex git-link expand-region evil-nerd-commenter ace-window flycheck highlight evil helm helm-core alert magit async yapfify xterm-color ws-butler window-numbering which-key volatile-highlights vagrant-tramp vagrant uuidgen undo-tree toc-org tagedit stickyfunc-enhance spacemacs-theme spaceline smeargle slim-mode scss-mode sass-mode reveal-in-osx-finder rainbow-delimiters racket-mode quelpa pytest pyenv-mode py-isort pug-mode popwin pip-requirements pcre2el pbcopy parsebib paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file olivetti neotree multi-term move-text markdown-mode magit-gitflow magit-gh-pulls macrostep lorem-ipsum log4e linum-relative link-hint less-css-mode launchctl key-chord ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-ag graphviz-dot-mode goto-chg google-translate golden-ratio gnuplot gntp github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-commit gist gh-md ggtags flyspell-correct-helm flx-ido fill-column-indicator fancy-battery eyebrowse exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diminish cython-mode column-enforce-mode cmake-mode clean-aindent-mode clang-format boogie-friends bind-key biblio auto-highlight-symbol auto-dictionary auto-compile auctex arduino-mode anaconda-mode aggressive-indent adaptive-wrap ace-link ace-jump-helm-line))))
+    (ivy helm-bibtex parsebib avy packed company yasnippet flycheck smartparens evil helm helm-core markdown-mode projectile magit magit-popup git-commit hydra vi-tilde-fringe evil-tutor define-word yapfify xterm-color ws-butler window-numbering which-key web-mode volatile-highlights vagrant-tramp vagrant uuidgen use-package toc-org tagedit stickyfunc-enhance srefactor spacemacs-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode reveal-in-osx-finder restart-emacs rainbow-delimiters racket-mode quelpa pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-ref org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file olivetti neotree multi-term move-text mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode launchctl info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-ag graphviz-dot-mode google-translate golden-ratio gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh-md ggtags flyspell-correct-helm flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-terminal-cursor-changer evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster cython-mode column-enforce-mode cmake-mode clean-aindent-mode clang-format boogie-friends auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk arduino-mode anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

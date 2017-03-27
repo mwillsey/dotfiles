@@ -101,7 +101,11 @@
 (require 'org)
 
 (defun org-mac-shell-command (cmd)
-  (shell-command-to-string (concat "client -i " (shell-quote-argument cmd))))
+  (case system-type
+    (otherwise
+     (shell-command-to-string cmd))
+    (darwin
+     (shell-command-to-string (concat "client -i " (shell-quote-argument cmd))))))
 
 (defgroup org-mac-link nil
   "Options for grabbing links from Mac applications."
