@@ -78,6 +78,9 @@ values."
      ;; other langs
      racket
      python
+     go
+     yaml
+     javascript
      )
    dotspacemacs-additional-packages '(olivetti
                                       boogie-friends
