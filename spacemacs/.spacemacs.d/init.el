@@ -161,6 +161,8 @@ values."
 
 (defun dotspacemacs/user-init ()
 
+  (setq custom-file (concat spacemacs-cache-directory "custom-settings.el"))
+
   ;; stop spacemacs from complaining about me setting my path
   (setq exec-path-from-shell-check-startup-files nil)
 
@@ -247,41 +249,3 @@ values."
   (require 'init-org)
 
   (setq gc-cons-threshold (* 800 1024)))
-
-
-
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(spacemacs-theme-comment-bg nil)
- '(spacemacs-theme-org-agenda-height nil)
- '(spacemacs-theme-org-height nil)
- '(spacemacs-theme-org-highlight nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(variable-pitch ((t (:family "Helvetica Neue Light")))))
-)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (ivy helm-bibtex parsebib avy packed company yasnippet flycheck smartparens evil helm helm-core markdown-mode projectile magit magit-popup git-commit hydra vi-tilde-fringe evil-tutor define-word yapfify xterm-color ws-butler window-numbering which-key web-mode volatile-highlights vagrant-tramp vagrant uuidgen use-package toc-org tagedit stickyfunc-enhance srefactor spacemacs-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode reveal-in-osx-finder restart-emacs rainbow-delimiters racket-mode quelpa pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-ref org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file olivetti neotree multi-term move-text mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode launchctl info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-ag graphviz-dot-mode google-translate golden-ratio gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh-md ggtags flyspell-correct-helm flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-terminal-cursor-changer evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster cython-mode column-enforce-mode cmake-mode clean-aindent-mode clang-format boogie-friends auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk arduino-mode anaconda-mode aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
