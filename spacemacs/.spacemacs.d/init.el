@@ -151,7 +151,7 @@ values."
    dotspacemacs-line-numbers nil
    dotspacemacs-folding-method 'evil
    dotspacemacs-smartparens-strict-mode nil
-   dotspacemacs-smart-closing-parenthesis t
+   dotspacemacs-smart-closing-parenthesis nil
    dotspacemacs-highlight-delimiters 'all
    dotspacemacs-persistent-server nil
    dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
@@ -245,6 +245,9 @@ values."
 
     (setq TeX-auto-local  ".auctex.auto"
           TeX-style-local ".auctex.style"))
+
+  (with-eval-after-load 'python
+    (setq python-shell-completion-native-enable nil))
 
   (require 'init-org)
 
