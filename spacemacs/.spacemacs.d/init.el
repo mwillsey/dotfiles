@@ -101,7 +101,7 @@ values."
   (setq-default
    dotspacemacs-elpa-https t
    dotspacemacs-elpa-timeout 5
-   dotspacemacs-check-for-update nil
+   dotspacemacs-check-for-update t
    dotspacemacs-elpa-subdirectory nil
    dotspacemacs-editing-style 'vim
    dotspacemacs-verbose-loading nil
@@ -180,12 +180,15 @@ values."
     "aos" 'helm-multi-swoop-org
     "TV"  'variable-pitch-mode)
 
-  (setq helm-echo-input-in-header-line nil)
+  (setq eshell-cmpl-ignore-case t
+        pcomplete-ignore-case t)
 
   ; spacemacs commented this out for now
   (unless (display-graphic-p)
     (spacemacs-evil/init-evil-terminal-cursor-changer)
     (evil-terminal-cursor-changer-activate))
+
+  (setq ns-pop-up-frames nil)
 
   (setq powerline-default-separator 'bar)
   (spaceline-compile)
