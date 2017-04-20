@@ -118,6 +118,13 @@
          nil
          ("~/Dropbox/org/agenda.html"))))
 
+;; bind my custom agenda
+(defun mw/org-agenda ()
+  (interactive)
+  (org-agenda nil "a"))
+(spacemacs/set-leader-keys
+  "aoa" 'mw/org-agenda)
+
 ;; disable org attach for now
 (setq org-attach-directory nil)
 
