@@ -58,6 +58,7 @@ values."
      graphviz
 
      ;; editing
+     auto-completion
      spell-checking
 
      ;; tex
@@ -67,7 +68,8 @@ values."
             latex-enable-folding t)
 
      ;; c
-     (c-c++ :variables c-c++-enable-clang-support t)
+     (c-c++ :variables
+            c-c++-enable-clang-support t)
      semantic
      gtags
 
@@ -81,6 +83,9 @@ values."
      go
      yaml
      javascript
+
+     ;; other applications
+     pandora ; private layer for now
      )
    dotspacemacs-additional-packages '(olivetti
                                       boogie-friends
@@ -102,7 +107,7 @@ values."
    dotspacemacs-elpa-https t
    dotspacemacs-elpa-timeout 5
    dotspacemacs-check-for-update t
-   dotspacemacs-elpa-subdirectory nil
+   dotspacemacs-elpa-subdirectory (format "%d" emacs-major-version)
    dotspacemacs-editing-style 'vim
    dotspacemacs-verbose-loading nil
    dotspacemacs-startup-banner nil
@@ -239,10 +244,10 @@ values."
     (case system-type
       (darwin
        (setq TeX-view-program-list '(("open" "open %o")
-                                     ("displayline" "displayline -b -g %n %o %b"))))
+                                     ("displayline" "displayline -b %n %o %b"))))
       (otherwise
        (setq TeX-view-program-list '(("open" "client open %o")
-                                     ("displayline" "client 'displayline -b -g %n' %o %b")))))
+                                     ("displayline" "client 'displayline -b %n' %o %b")))))
 
     (add-to-list 'LaTeX-verbatim-macros-with-delims "lstinline")
 

@@ -46,6 +46,9 @@
       org-ellipsis "…"
       org-startup-indented t)
 
+;; don't open new windows for file links
+(add-to-list 'org-link-frame-setup '(file . find-file))
+
 ;; dim drawers and stuff, they are too bold as-is
 (mw/take-face-attribute 'org-special-keyword 'shadow :foreground)
 
