@@ -103,10 +103,13 @@
                              "----------------"
                              (800 1000 1200 1400 1600 1800 2000)))
 
+;; spacemacs niceties
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
   "r" 'org-refile)
 (spacemacs/set-leader-keys-for-major-mode 'org-agenda-mode
   "r" 'org-agenda-refile)
+(add-to-list 'spacemacs-useful-buffers-regexp "\\*Org Agenda\\*")
+
 
 ;; agenda should make sure to include things that need to be refiled
 (setq org-agenda-custom-commands
