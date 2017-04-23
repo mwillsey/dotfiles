@@ -171,6 +171,11 @@ values."
   ;; stop spacemacs from complaining about me setting my path
   (setq exec-path-from-shell-check-startup-files nil)
 
+  ;; ignore certain file extensions when looking for files
+  ;; needs to be run before helm loads so it can see this when making
+  ;; helm-boring-file-regex-list
+  (add-to-list 'completion-ignored-extensions ".dropbox" ".synctex.gz")
+
   ;; Appearance and theme
   (setq-default spacemacs-theme-org-agenda-height nil
                 spacemacs-theme-org-height nil
@@ -187,6 +192,9 @@ values."
 
   (setq eshell-cmpl-ignore-case t
         pcomplete-ignore-case t)
+
+  ;; don't show garbage in my find-file
+  (setq helm-ff-skip-boring-files t)
 
   ; spacemacs commented this out for now
   (unless (display-graphic-p)
