@@ -52,30 +52,57 @@
 ;; dim drawers and stuff, they are too bold as-is
 (mw/take-face-attribute 'org-special-keyword 'shadow :foreground)
 
+;; clocking
+
+;; Resume clocking task on clock-in if the clock is open
+(org-clock-persistence-insinuate)
+(setq org-clock-persist t
+      org-clock-persist-query-resume t)
+
+;; clock setup
+(setq org-clock-in-resume t
+      org-clock-in-switch-to-state nil
+      org-clock-into-drawer t
+      org-clock-out-remove-zero-time-clocks t
+      org-clock-out-when-done t
+      org-clock-report-include-clocking-task t
+      org-clock-auto-clock-resolution 'when-no-clock-is-running
+      org-clock-mode-line-total 'today)
+
+(spacemacs/set-leader-keys
+  "aog" 'org-clock-goto
+  "aoI" 'org-clock-in)
+(spacemacs/toggle-mode-line-org-clock-on)
+
 ;; put everything into a drawer
 (setq org-log-done nil
-      org-log-into-drawer t)
+      org-log-into-drawer t
+      org-agenda-log-mode-items '(closed state clock))
+
+(setq org-enforce-todo-dependencies t)
+
 
 (setq org-todo-keywords '((sequence
                            "TODO(t)" "NEXT(n!)" "HOLD(h@/!)"
                            "|"
-                           "DONE(d!)" "DROP(c@/!)")
-                          (type "MEETING(m)"))
+                           "DONE(d!)" "CANCELED(c@/!)")
+                          (type "MEET(m)"))
       org-todo-keyword-faces '(("TODO" . "red1")
                                ("NEXT" . "magenta1")
                                ("DONE" . "green4")
                                ("HOLD" . "gold3")
-                               ("DROP" . "blue3")))
+                               ("CANCELED" . "blue3")))
 
 (setq org-capture-templates
-      '(("t" "todo" entry (file org-default-notes-file)
-         "* TODO %?\n")
-        ("j" "journal" entry (file "journal.org")
-         "* %?\n")
-        ("m" "mail" entry (file org-default-notes-file)
-         "* TODO %a\nSCHEDULED: %t\n%?")
-        (" " "blank" entry (file org-default-notes-file)
-         "* %?\n")))
+      '(("t" "todo"
+         entry (file org-default-notes-file)
+         "* TODO %?\n%U")
+        ("m" "meeting"
+         entry (file org-default-notes-file)
+         "* MEET %?\n%U")
+        (" " "blank"
+         entry (file org-default-notes-file)
+         "* %?\n%U")))
 
 (add-hook 'org-capture-mode-hook 'evil-insert-state)
 
@@ -91,7 +118,9 @@
 ;;   (olivetti-set-width 85))
 
 ;; clean 3 day view, only show the time grid on a single day
+;; show preceding weekends for weekly views
 (setq org-agenda-span 3
+      org-agenda-start-on-weekday 6
       org-agenda-window-setup 'current-window
       org-agenda-restore-windows-after-quit nil
       org-agenda-skip-timestamp-if-done nil
@@ -114,19 +143,30 @@
 ;; agenda should make sure to include things that need to be refiled
 (setq org-agenda-custom-commands
       '(("a" "Agenda"
-         ((tags "refile"
+         ((agenda "" nil)
+          (tags "refile"
                 ((org-agenda-overriding-header "Refile")
-                 (org-tags-match-list-sublevels t)))
-          (agenda "" nil))
+                 (org-tags-match-list-sublevels t)
+                 (org-agenda-start-with-log-mode nil)
+                 (org-agenda-start-with-clockreport-mode nil))))
          nil
-         ("~/Dropbox/org/agenda.html"))))
+         ("~/Dropbox/org/agenda.html"))
+        ("w" "Weekly Review"
+         agenda ""
+         (;; only show work stuff
+          (org-agenda-files (cons org-directory
+                                  (mapcar 'mw/dir (list "work/"))))
+          (org-agenda-span 'week)
+          (org-agenda-entry-types '(:sexp :timestamp :deadline))
+          (org-agenda-start-with-log-mode t)
+          (org-agenda-start-with-clockreport-mode t)))))
 
-;; bind my custom agenda
-(defun mw/org-agenda ()
-  (interactive)
-  (org-agenda nil "a"))
+;; bind my custom agendas
+(defun mw/org-agenda () (interactive) (org-agenda nil "a"))
+(defun mw/org-review () (interactive) (org-agenda nil "w"))
 (spacemacs/set-leader-keys
-  "aoa" 'mw/org-agenda)
+  "aoa" 'mw/org-agenda
+  "aow" 'mw/org-review)
 
 ;; disable org attach for now
 (setq org-attach-directory nil)
@@ -185,7 +225,7 @@
                    ":Pages:     %p"
                    ":DOI:       %D"
                    ":URL:       %U"
-                   ":END:") "\n"))
+                   ":END:\n") "\n"))
 
 
 (org-babel-do-load-languages
