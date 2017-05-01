@@ -58,7 +58,7 @@ values."
      graphviz
 
      ;; editing
-     auto-completion
+     ;; auto-completion
      spell-checking
 
      ;; tex
@@ -211,6 +211,17 @@ values."
 
   (use-package llvm-mode
     :load-path "~/src/llvm/utils/emacs")
+
+  ;; woman doesn't work on mac, set up man instead
+  ;; make it immediately open an new window and make it active, also it needs to
+  ;; be called interactively
+  (setq Man-notify-method 'aggressive)
+  (evil-define-motion evil-lookup ()
+    (call-interactively evil-lookup-func))
+  (setq evil-lookup-func
+        (case system-type
+          (darwin 'man-follow)
+          (otherwise 'woman)))
 
   ;; boogie set up
   (setq flycheck-dafny-executable "/Users/mwillsey/src/dafny/dafny")
