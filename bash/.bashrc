@@ -39,7 +39,6 @@ export PERL5LIB="$STOW_DIR/stow/share/perl5:$PERL5LIB"
 export PYTHONUSERBASE=$LOCAL
 
 export EDITOR=vim
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 export GLOBIGNORE=".:.."
 
 # aliases and shortcuts
