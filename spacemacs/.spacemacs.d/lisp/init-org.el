@@ -100,6 +100,10 @@
         ("m" "meeting"
          entry (file org-default-notes-file)
          "* MEET %?\n%U")
+        ("w" "website"
+         entry (file org-default-notes-file)
+         "* TODO %(org-mac-safari-get-frontmost-url)\n%U"
+         :immediate-finish t)
         (" " "blank"
          entry (file org-default-notes-file)
          "* %?\n%U")))
