@@ -41,7 +41,7 @@ values."
    dotspacemacs-ask-for-lazy-installation t
    dotspacemacs-configuration-layer-path '()
    dotspacemacs-configuration-layers
-   '(
+     '(
      ;; system
      (shell :variables shell-default-shell 'eshell)
      osx
@@ -58,7 +58,8 @@ values."
      graphviz
 
      ;; editing
-     ;; auto-completion
+     (auto-completion
+      :disabled-for org latex)
      spell-checking
 
      ;; tex
@@ -78,6 +79,7 @@ values."
      markdown
 
      ;; other langs
+     (haskell :variables haskell-completion-backend 'intero)
      racket
      python
      go
@@ -174,7 +176,8 @@ values."
   ;; ignore certain file extensions when looking for files
   ;; needs to be run before helm loads so it can see this when making
   ;; helm-boring-file-regex-list
-  (add-to-list 'completion-ignored-extensions ".dropbox" ".synctex.gz")
+  (dolist (pat '(".dropbox" ".synctex.gz" ".DS_Store"))
+    (add-to-list 'completion-ignored-extensions pat))
 
   ;; Appearance and theme
   (setq-default spacemacs-theme-org-agenda-height nil
@@ -203,6 +206,11 @@ values."
 
   (setq ns-pop-up-frames nil)
 
+  (with-eval-after-load 'neotree
+    (with-eval-after-load 'helm
+      (setq neo-hidden-regexp-list helm-boring-file-regexp-list
+            neo-show-hidden-files nil)))
+
   (setq powerline-default-separator 'bar)
   (spaceline-compile)
 
@@ -211,6 +219,9 @@ values."
 
   (use-package llvm-mode
     :load-path "~/src/llvm/utils/emacs")
+
+  ;; just use go mode for antha
+  (add-to-list 'auto-mode-alist '("\\.an\\'" . go-mode))
 
   ;; woman doesn't work on mac, set up man instead
   ;; make it immediately open an new window and make it active, also it needs to
@@ -274,7 +285,8 @@ values."
           TeX-style-local ".auctex.style"))
 
   (with-eval-after-load 'python
-    (setq python-shell-completion-native-enable nil))
+    (setq python-shell-completion-native-enable nil
+          python-shell-interpreter "python3"))
 
   (require 'init-org)
 

@@ -147,12 +147,12 @@
 ;; agenda should make sure to include things that need to be refiled
 (setq org-agenda-custom-commands
       '(("a" "Agenda"
-         ((agenda "" nil)
+         ((agenda ""
+                  ((org-agenda-start-with-log-mode nil)
+                   (org-agenda-start-with-clockreport-mode nil)))
           (tags "refile"
                 ((org-agenda-overriding-header "Refile")
-                 (org-tags-match-list-sublevels t)
-                 (org-agenda-start-with-log-mode nil)
-                 (org-agenda-start-with-clockreport-mode nil))))
+                 (org-tags-match-list-sublevels t))))
          nil
          ("~/Dropbox/org/agenda.html"))
         ("w" "Weekly Review"
