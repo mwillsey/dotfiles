@@ -19,24 +19,19 @@ YELLOW="\[\033[0;33m\]"
 
 export PS1="${GREEN}\u@\h${RESET}:${BLUE}\w${RESET}\n\$ "
 
-
-# Environment variables
-
-export LOCAL=$HOME/local
-export PREFIX=$LOCAL
-
-export PATH="$LOCAL/bin:$PATH"
-export MANPATH="$LOCAL/share/man:$MANPATH"
-export LD_LIBRARY_PATH="$LOCAL/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="$LOCAL/lib/pkgconfig:$PKG_CONFIG_PATH"
-export STOW_DIR="$LOCAL/stow"
-
 # this is kind of a bad thing
 # to avoid actually having local perl modules, I just point PERL5LIB to the
 # stow install so it can find its own perl module
 export PERL5LIB="$STOW_DIR/stow/share/perl5:$PERL5LIB"
 # export PYTHONPATH="$LOCAL/lib/python2.7/site-packages:$PYTHONPATH"
 export PYTHONUSERBASE=$LOCAL
+
+# lazily load python virtualenv wrapper
+# http://virtualenvwrapper.readthedocs.io/en/latest/install.html
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=  # don't use project management
+export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 export EDITOR=vim
 export GLOBIGNORE=".:.."
