@@ -1,8 +1,5 @@
 # .profile
 
-# Get the aliases and functions
-[ -f ~/.bashrc ] && source ~/.bashrc
-
 # Use local for local builds
 
 export LOCAL=$HOME/local
@@ -33,3 +30,6 @@ fi
 # OPAM configuration
 ocaml_init=$HOME/.opam/opam-init/init.sh
 [ -f $ocaml_init ] && source $ocaml_init > /dev/null 2> /dev/null
+
+# now run the rc file
+[ -f ~/.bashrc ] && source ~/.bashrc

@@ -9,7 +9,7 @@ function include () {
 include /etc/bashrc
 include ~/.bashrc.local
 include ~/fzf.bash
-include /etc/bash_completion.d/git
+include /usr/local/etc/bash_completion
 
 RESET="\[\033[0m\]"
 RED="\[\033[0;31m\]"
