@@ -12,6 +12,7 @@
 *.lof
 *.lot
 *.lox
+*.out
 *.synctex.gz
 *.upa
 *.upb
