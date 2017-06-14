@@ -97,6 +97,7 @@ values."
    dotspacemacs-install-packages 'used-only
    dotspacemacs-excluded-packages '(vi-tilde-fringe
                                     evil-tutor
+                                    yasnippet
                                     powerline)))
 
 (defun dotspacemacs/init ()
@@ -204,7 +205,12 @@ values."
     (spacemacs-evil/init-evil-terminal-cursor-changer)
     (evil-terminal-cursor-changer-activate))
 
+  ;;; splitting and window behavior
+  ;; dont make new frames
   (setq ns-pop-up-frames nil)
+  ;; try to split vertically more often
+  (setq split-height-threshold 80
+        split-width-threshold  120)
 
   (with-eval-after-load 'neotree
     (with-eval-after-load 'helm
@@ -278,6 +284,8 @@ values."
       (otherwise
        (setq TeX-view-program-list '(("open" "client open %o")
                                      ("displayline" "client 'displayline -b %n' %o %b")))))
+
+    (setq-default TeX-command-extra-options "-shell-escape")
 
     (add-to-list 'LaTeX-verbatim-macros-with-delims "lstinline")
 
