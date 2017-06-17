@@ -205,14 +205,11 @@ values."
     (spacemacs-evil/init-evil-terminal-cursor-changer)
     (evil-terminal-cursor-changer-activate))
 
-  ;;; splitting and window behavior
   ;; dont make new frames
   (setq ns-pop-up-frames nil)
-  ;; try to split vertically more often
-  (setq split-window-preferred-function 'mw/split-window-sensibly
-        split-height-threshold 80
-        split-width-threshold  120)
 
+  ;; try to split vertically more often
+  (setq split-window-preferred-function 'mw/split-window-sensibly)
   (defun mw/split-window-sensibly (&optional window)
     "My version of `split-window-sensibly' that tries horizontal splitting
     before vertical."
@@ -230,12 +227,12 @@ values."
        (and (eq window (frame-root-window (window-frame window)))
             (not (window-minibuffer-p window))
             ;; If WINDOW is the only window on its frame and is not the
-            ;; minibuffer window, try to split it horizontally disregarding
-            ;; the value of `split-width-threshold'.
-            (let ((split-width-threshold 0))
-              (when (window-splittable-p window horiz)
+            ;; minibuffer window, try to split it vertically disregarding
+            ;; the value of `split-height-threshold'.
+            (let ((split-height-threshold 0))
+              (when (window-splittable-p window)
                 (with-selected-window window
-                  (split-window-right))))))))
+                  (split-window-below))))))))
 
   (with-eval-after-load 'neotree
     (with-eval-after-load 'helm
