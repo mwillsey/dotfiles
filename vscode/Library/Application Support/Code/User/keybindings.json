@@ -1,0 +1,5 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+    // Restore command taken by join-lines
+    { "key": "cmd+j", "command": "workbench.action.togglePanel" } 
+]

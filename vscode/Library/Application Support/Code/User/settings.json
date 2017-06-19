@@ -1,0 +1,31 @@
+// Place your settings in this file to overwrite the default settings
+{
+
+     // Controls the font family.
+    "editor.fontFamily": "Inconsolata",
+
+    // Controls the font size.
+    "editor.fontSize": 14,
+
+    //Latex Compile Configuration
+    "latexCompile.openAfterCompile": true,
+    "latexCompile.openLogAfterError": true,
+    "latexCompile.compiler": "pdflatex",
+    "workbench.colorTheme": "Default Light+",
+
+    "editor.cursorBlinking": "solid",
+
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/.vagrant": true
+    },
+
+    "vim.disableAnnoyingGcMessage": true,
+    "vim.disableAnnoyingNeovimMessage": true
+}
