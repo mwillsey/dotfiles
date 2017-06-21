@@ -60,6 +60,7 @@ values."
      ;; editing
      (auto-completion
       :disabled-for org latex)
+     syntax-checking
      spell-checking
 
      ;; tex
@@ -81,6 +82,7 @@ values."
      ;; other langs
      (haskell :variables haskell-completion-backend 'intero)
      racket
+     idris
      python
      go
      yaml
