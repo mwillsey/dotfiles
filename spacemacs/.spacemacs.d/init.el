@@ -207,6 +207,14 @@ values."
     (spacemacs-evil/init-evil-terminal-cursor-changer)
     (evil-terminal-cursor-changer-activate))
 
+
+  (spacemacs/set-leader-keys "fT" 'mw/open-terminal)
+  (defun mw/open-terminal ()
+    (interactive)
+    (shell-command (concat
+                    "open -a Terminal.app "
+                    (expand-file-name default-directory))))
+
   ;; dont make new frames
   (setq ns-pop-up-frames nil)
 
