@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+maildir=/Users/mwillsey/mail
+
+# before syncing, remove anything in the inbox that's not marked 'inbox'
+# you need to grep here, because notmuch returns all messages that have a copy
+# that matches (including those from /all)
+clean_inbox () {
+    to_clean=$(mktemp)
+    notmuch search --output=files folder:$1/inbox -is:inbox |
+        grep $maildir/$1/inbox/ > $to_clean
+    printf "Cleaning %s from $1/inbox\n" $(cat $to_clean | wc -l)
+    cat $to_clean | xargs -n1 rm
+}
+
+clean_trash () {
+    to_trash=$(mktemp)
+    # make sure to not move trashed files to themselves
+    notmuch search --output=files is:trash |
+        grep $maildir/$1/ |
+        grep -v $maildir/$1/trash > $to_trash
+    printf "Trashing %s from $1\n" $(cat $to_trash | wc -l)
+    while read f; do
+        target="$(basename "$f" | sed 's/,U=[0-9]*//')"
+        echo "mv $f $maildir/$1/trash/cur/$target"
+        mv "$f" "$maildir/$1/trash/cur/$target"
+    done < $to_trash
+}
+
+clean_inbox cse
+clean_inbox mw
+clean_trash cse
+clean_trash mw
+
+# sync mailboxes in parallel
+mbsync cse && echo "sync cse done!" || echo "mbsync cse failed!" &
+mbsync mw  && echo "sync mw done!"  || echo "mbsync mw failed!"  &
+wait

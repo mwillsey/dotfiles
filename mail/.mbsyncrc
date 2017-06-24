@@ -1,0 +1,95 @@
+# -*- mode: conf -*-
+# Max's .mbsyncrc
+
+Create Both
+Expunge Both
+SyncState *
+
+### personal mwillsey email
+
+IMAPAccount mw
+Host imap.gmail.com
+User mwillsey@gmail.com
+PassCmd "security find-generic-password -s mw-gmail-keychain -w"
+AuthMechs LOGIN
+SSLType IMAPS
+
+IMAPStore mw-remote
+Account mw
+
+MaildirStore mw-local
+Path ~/mail/mw/
+Inbox ~/mail/mw/inbox
+
+Channel mw-trash
+Master :mw-remote:[Gmail]/Trash
+Slave :mw-local:trash
+
+Channel mw-inbox
+Master :mw-remote:INBOX
+Slave :mw-local:inbox
+
+Channel mw-drafts
+Master :mw-remote:[Gmail]/Drafts
+Slave :mw-local:drafts
+
+Channel mw-sent
+Master ":mw-remote:[Gmail]/Sent Mail"
+Slave :mw-local:sent
+
+Channel mw-all
+Master ":mw-remote:[Gmail]/All Mail"
+Slave :mw-local:all
+# Patterns !"INBOX" !"[Gmail]/Sent Mail" !"[Gmail]/Drafts"
+
+Group mw
+Channel mw-trash
+Channel mw-inbox
+Channel mw-drafts
+Channel mw-sent
+Channel mw-all
+
+
+### CSE email
+
+IMAPAccount cse
+Host imap.gmail.com
+User mwillsey@cs.washington.edu
+PassCmd "security find-generic-password -s cse-gmail-keychain -w"
+AuthMechs LOGIN
+SSLType IMAPS
+
+IMAPStore cse-remote
+Account cse
+
+MaildirStore cse-local
+Path ~/mail/cse/
+Inbox ~/mail/cse/inbox
+
+Channel cse-trash
+Master :cse-remote:[Gmail]/Trash
+Slave :cse-local:trash
+
+Channel cse-inbox
+Master :cse-remote:INBOX
+Slave :cse-local:inbox
+
+Channel cse-drafts
+Master :cse-remote:[Gmail]/Drafts
+Slave :cse-local:drafts
+
+Channel cse-sent
+Master ":cse-remote:[Gmail]/Sent Mail"
+Slave :cse-local:sent
+
+Channel cse-all
+Master ":cse-remote:[Gmail]/All Mail"
+Slave :cse-local:all
+# Patterns !"INBOX" !"[Gmail]/Sent Mail" !"[Gmail]/Drafts"
+
+Group cse
+Channel cse-trash
+Channel cse-inbox
+Channel cse-drafts
+Channel cse-sent
+Channel cse-all

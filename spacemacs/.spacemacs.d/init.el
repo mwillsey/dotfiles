@@ -189,7 +189,9 @@ values."
 
 (defun dotspacemacs/user-config ()
 
-  (add-to-list 'load-path (expand-file-name "lisp" dotspacemacs-directory))
+  (add-to-load-path (expand-file-name "lisp" dotspacemacs-directory))
+  (load "init-org")
+  (load "init-mail")
 
   (spacemacs/set-leader-keys
     "RET" 'helm-mini

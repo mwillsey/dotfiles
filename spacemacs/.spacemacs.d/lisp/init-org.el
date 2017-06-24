@@ -100,6 +100,9 @@
         ("m" "meeting"
          entry (file org-default-notes-file)
          "* MEET %?\n%U")
+        ("l" "link"
+         entry (file org-default-notes-file)
+         "* TODO %?\n%U\n%a\n")
         ("w" "website"
          entry (file org-default-notes-file)
          "* TODO %(org-mac-safari-get-frontmost-url)\n%U"
