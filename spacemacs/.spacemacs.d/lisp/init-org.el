@@ -241,6 +241,7 @@
    (shell . t)
    (sql . t)
    (dot . t)
+   (racket . t)
    (python . t)))
 
 (setq org-edit-src-content-indentation 0)
