@@ -51,9 +51,6 @@ values."
      helm
      org
 
-     ;; mail
-     mu4e
-
      ;; tools
      git
      github
@@ -103,8 +100,6 @@ values."
    dotspacemacs-excluded-packages '(vi-tilde-fringe
                                     evil-tutor
                                     yasnippet
-                                    ;; don't need this, just makes mu4e slower
-                                    mu4e-maildirs-extension
                                     powerline)))
 
 (defun dotspacemacs/init ()
@@ -196,7 +191,6 @@ values."
 
   (add-to-load-path (expand-file-name "lisp" dotspacemacs-directory))
   (load "init-org")
-  (load "init-mail")
 
   (spacemacs/set-leader-keys
     "RET" 'helm-mini
