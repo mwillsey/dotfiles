@@ -51,6 +51,9 @@ values."
      helm
      org
 
+     ;; mail
+     mu4e
+
      ;; tools
      git
      github
@@ -100,6 +103,8 @@ values."
    dotspacemacs-excluded-packages '(vi-tilde-fringe
                                     evil-tutor
                                     yasnippet
+                                    ;; don't need this, just makes mu4e slower
+                                    mu4e-maildirs-extension
                                     powerline)))
 
 (defun dotspacemacs/init ()
