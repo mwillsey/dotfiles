@@ -209,12 +209,20 @@ values."
     (evil-terminal-cursor-changer-activate))
 
 
-  (spacemacs/set-leader-keys "fT" 'mw/open-terminal)
+  (spacemacs/set-leader-keys "bt" 'mw/open-terminal)
   (defun mw/open-terminal ()
+    "Open the current directory in a new terminal tab."
     (interactive)
-    (shell-command (concat
-                    "open -a Terminal.app "
-                    (expand-file-name default-directory))))
+    (ns-do-applescript
+     (format "
+        tell application \"Terminal\"
+          activate
+          tell application \"System Events\"
+            keystroke \"t\" using {command down}
+          end tell
+          do script \"cd %s\" in selected tab of the front window
+        end tell"
+      (expand-file-name default-directory))))
 
   ;; dont make new frames
   (setq ns-pop-up-frames nil)
