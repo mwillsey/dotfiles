@@ -37,6 +37,11 @@
       org-refile-use-outline-path 'file
       org-refile-targets '((org-agenda-files :maxlevel . 9)))
 
+
+;; use unique id's for org links
+(require 'org-id)
+(setq org-id-link-to-org-use-id t)
+
 (require 'org-mac-link)
 (spacemacs/set-leader-keys-for-major-mode 'org-mode "ig" 'org-mac-grab-link)
 
@@ -49,8 +54,11 @@
 ;; don't open new windows for file links
 (add-to-list 'org-link-frame-setup '(file . find-file))
 
-;; dim drawers and stuff, they are too bold as-is
+;; dim drawers and dates, they are too bold as-is
 (mw/take-face-attribute 'org-special-keyword 'shadow :foreground)
+(mw/take-face-attribute 'org-date            'shadow :foreground)
+(mw/take-face-attribute 'org-tag             'shadow :foreground)
+(mw/take-face-attribute 'org-ellipsis        'shadow :foreground)
 
 ;; clocking
 
@@ -82,16 +90,18 @@
 (setq org-enforce-todo-dependencies t)
 
 
-(setq org-todo-keywords '((sequence
-                           "TODO(t)" "NEXT(n!)" "HOLD(h@/!)"
-                           "|"
-                           "DONE(d!)" "CANCELED(c@/!)")
-                          (type "MEET(m)"))
-      org-todo-keyword-faces '(("TODO" . "red1")
-                               ("NEXT" . "magenta1")
-                               ("DONE" . "green4")
-                               ("HOLD" . "gold3")
-                               ("CANCELED" . "blue3")))
+(setq org-todo-keywords
+      '((sequence
+         "TODO(t)" "NEXT(n!)" "HOLD(h@/!)"
+         "|"
+         "DONE(d!)" "CANCELED(c@/!)")
+        (type "MEET(m)"))
+      org-todo-keyword-faces
+      '(("TODO" . "red1")
+        ("NEXT" . "magenta1")
+        ("DONE" . "green4")
+        ("HOLD" . "gold3")
+        ("CANCELED" . "blue3")))
 
 (setq org-capture-templates
       '(("t" "todo"
@@ -99,11 +109,20 @@
          "* TODO %?\n%U")
         ("m" "meeting"
          entry (file org-default-notes-file)
-         "* MEET %?\n%U")
+         "* MEET %? %t\n")
         ("l" "link"
          entry (file org-default-notes-file)
          "* TODO %?\n%U\n%a\n")
+        ("j" "journal"
+         entry (file "journal.org")
+         "* %?\n%U\n")
+        ("g" "goal"
+         entry (file "journal.org")
+         "* GOAL %?\n%T\n")
         ("w" "website"
+         entry (file org-default-notes-file)
+         "* TODO %(org-mac-safari-get-frontmost-url)\n%U\n%?")
+        ("W" "website + finish"
          entry (file org-default-notes-file)
          "* TODO %(org-mac-safari-get-frontmost-url)\n%U"
          :immediate-finish t)
@@ -175,8 +194,10 @@
   "aoa" 'mw/org-agenda
   "aow" 'mw/org-review)
 
-;; disable org attach for now
-(setq org-attach-directory nil)
+;; org attach
+(setq org-attach-directory nil ; disable (mw/dir "attach")
+      org-attach-auto-tag "attach"
+      org-attach-commit nil)
 
 ;; clean up the default export settings
 (setq org-export-with-toc nil
