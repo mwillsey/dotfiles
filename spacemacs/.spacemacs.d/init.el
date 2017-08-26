@@ -59,7 +59,7 @@ values."
 
      ;; editing
      (auto-completion
-      :disabled-for org latex)
+      :disabled-for emacs-lisp org latex)
      syntax-checking
      spell-checking
 
@@ -87,9 +87,7 @@ values."
      go
      yaml
      javascript
-
-     ;; other applications
-     pandora ; private layer for now
+     lean ; private
      )
    dotspacemacs-additional-packages '(olivetti
                                       boogie-friends
@@ -173,6 +171,11 @@ values."
 
   (setq custom-file (concat spacemacs-cache-directory "custom-settings.el"))
 
+  (add-to-load-path (expand-file-name "lisp/" dotspacemacs-directory))
+  (setq dotspacemacs-configuration-layer-path
+        (list
+         (expand-file-name "layers/" dotspacemacs-directory)))
+
   ;; stop spacemacs from complaining about me setting my path
   (setq exec-path-from-shell-check-startup-files nil)
 
@@ -189,7 +192,6 @@ values."
 
 (defun dotspacemacs/user-config ()
 
-  (add-to-load-path (expand-file-name "lisp" dotspacemacs-directory))
   (load "init-org")
 
   (spacemacs/set-leader-keys
@@ -202,6 +204,10 @@ values."
 
   ;; don't show garbage in my find-file
   (setq helm-ff-skip-boring-files t)
+
+  ;; olivetti is better
+  (spacemacs/set-leader-keys "wc" 'olivetti-mode)
+  (setq-default olivetti-body-width 100)
 
   ; spacemacs commented this out for now
   (unless (display-graphic-p)
@@ -226,6 +232,9 @@ values."
 
   ;; dont make new frames
   (setq ns-pop-up-frames nil)
+
+  ;; TeX is the only one I really use
+  (setq default-input-method "TeX")
 
   ;; try to split vertically more often
   (setq split-window-preferred-function 'mw/split-window-sensibly)
@@ -257,6 +266,15 @@ values."
     (with-eval-after-load 'helm
       (setq neo-hidden-regexp-list helm-boring-file-regexp-list
             neo-show-hidden-files nil)))
+
+  ;; recenter after jumping with helm
+  ;; helm-jump-in-buffer calls helm-semantic-or-imenu
+  ;; lambda is necessary to preserve the interactive-ness
+  (advice-add 'helm-semantic-or-imenu    :after 'recenter)
+  (advice-add 'helm-imenu-in-all-buffers :after '(lambda () (recenter)))
+
+  (with-eval-after-load 'helm
+    (define-key helm-map (kbd "<C-return>") 'helm-select-action))
 
   (setq powerline-default-separator 'bar)
   (spaceline-compile)
@@ -335,8 +353,13 @@ values."
 
   (with-eval-after-load 'python
     (setq python-shell-completion-native-enable nil
-          python-shell-interpreter "python3"))
+          python-shell-interpreter "python3"
+          python-test-runner 'pytest))
 
-  (require 'init-org)
+  (with-eval-after-load 'magit
+    ;; don't use use built-in vc anymore
+    (setq vc-handled-backends (delq 'Git vc-handled-backends))
+    ;; save my files for me
+    (setq magit-save-repository-buffers 'dontask))
 
   (setq gc-cons-threshold (* 800 1024)))
