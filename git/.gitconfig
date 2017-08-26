@@ -8,5 +8,5 @@
 [push]
     default = simple
 
-[merge]
+[pull]
     ff = only
