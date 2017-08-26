@@ -41,7 +41,7 @@ values."
    dotspacemacs-ask-for-lazy-installation t
    dotspacemacs-configuration-layer-path '()
    dotspacemacs-configuration-layers
-     '(
+   '(
      ;; system
      (shell :variables shell-default-shell 'eshell)
      osx
@@ -58,10 +58,10 @@ values."
      graphviz
 
      ;; editing
-     (auto-completion
-      :disabled-for emacs-lisp org latex)
+     auto-completion
      syntax-checking
      spell-checking
+     semantic
 
      ;; tex
      bibtex
@@ -72,7 +72,6 @@ values."
      ;; c
      (c-c++ :variables
             c-c++-enable-clang-support t)
-     semantic
      gtags
 
      ;; web
@@ -87,7 +86,12 @@ values."
      go
      yaml
      javascript
-     lean ; private
+     lua
+     sql
+     rust
+
+     ;; other applications
+     pandora ; private layer for now
      )
    dotspacemacs-additional-packages '(olivetti
                                       boogie-friends
@@ -196,6 +200,7 @@ values."
 
   (spacemacs/set-leader-keys
     "RET" 'helm-mini
+    "p RET" 'helm-projectile
     "aos" 'helm-multi-swoop-org
     "TV"  'variable-pitch-mode)
 
@@ -209,10 +214,17 @@ values."
   (spacemacs/set-leader-keys "wc" 'olivetti-mode)
   (setq-default olivetti-body-width 100)
 
-  ; spacemacs commented this out for now
+  ;; spacemacs commented this out for now
   (unless (display-graphic-p)
     (spacemacs-evil/init-evil-terminal-cursor-changer)
     (evil-terminal-cursor-changer-activate))
+
+
+  ;; please don't ask me, just compile
+  (setq compilation-ask-about-save nil)
+
+  (with-eval-after-load 'lua
+    (setq lua-indent-level 4))
 
 
   (spacemacs/set-leader-keys "bt" 'mw/open-terminal)
