@@ -41,8 +41,7 @@ values."
    dotspacemacs-ask-for-lazy-installation t
    dotspacemacs-configuration-layer-path '()
    dotspacemacs-configuration-layers
-   '(
-     ;; system
+   '(;; system
      (shell :variables shell-default-shell 'eshell)
      osx
 
@@ -77,6 +76,8 @@ values."
      ;; web
      html
      markdown
+     javascript
+     typescript
 
      ;; other langs
      (haskell :variables haskell-completion-backend 'intero)
@@ -85,7 +86,6 @@ values."
      python
      go
      yaml
-     javascript
      lua
      sql
      rust
@@ -95,8 +95,7 @@ values."
      )
    dotspacemacs-additional-packages '(olivetti
                                       boogie-friends
-                                      arduino-mode
-                                      evil-terminal-cursor-changer)
+                                      arduino-mode)
    dotspacemacs-frozen-packages '()
    dotspacemacs-install-packages 'used-only
    dotspacemacs-excluded-packages '(vi-tilde-fringe
@@ -299,6 +298,9 @@ values."
 
   ;; just use go mode for antha
   (add-to-list 'auto-mode-alist '("\\.an\\'" . go-mode))
+
+  (with-eval-after-load 'tide
+    (setq tide-tsserver-executable "/usr/local/bin/tsserver"))
 
   ;; woman doesn't work on mac, set up man instead
   ;; make it immediately open an new window and make it active, also it needs to
