@@ -94,6 +94,7 @@ values."
      pandora ; private layer for now
      )
    dotspacemacs-additional-packages '(olivetti
+                                      default-text-scale
                                       boogie-friends
                                       arduino-mode)
    dotspacemacs-frozen-packages '()
@@ -213,6 +214,11 @@ values."
   ;; olivetti is better
   (spacemacs/set-leader-keys "wc" 'olivetti-mode)
   (setq-default olivetti-body-width 100)
+
+  ;; bind shift-cmd +/- to *globally* modify the font size
+  ;; unlike the un-shifted version that is buffer local
+  (global-set-key (kbd "H-+") 'default-text-scale-increase)
+  (global-set-key (kbd "H-_") 'default-text-scale-decrease)
 
   ;; spacemacs commented this out for now
   (unless (display-graphic-p)
