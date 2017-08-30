@@ -113,7 +113,8 @@ values."
    dotspacemacs-elpa-https t
    dotspacemacs-elpa-timeout 5
    dotspacemacs-check-for-update t
-   dotspacemacs-elpa-subdirectory (format "%d" emacs-major-version)
+   dotspacemacs-elpa-subdirectory (format "%d-%s" emacs-major-version
+                                          (spacemacs//git-get-current-branch))
    dotspacemacs-editing-style 'vim
    dotspacemacs-verbose-loading nil
    dotspacemacs-startup-banner nil
