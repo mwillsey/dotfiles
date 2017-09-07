@@ -31,7 +31,7 @@ export PYTHONUSERBASE=$LOCAL
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=  # don't use project management
 export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-export VIRTUALENVWRAPPER_PYTHON=python2 # use homebrew python instead of macOS
+export VIRTUALENVWRAPPER_PYTHON=$(which python2) # use homebrew python instead of macOS
 source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 export EDITOR=vim
