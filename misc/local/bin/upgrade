@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+echo "brew upgrade"
+brew upgrade
+
+echo
+echo
+
+echo -n "Updating spacemacs packages... "
+emacs -eval "
+  (progn 
+    (configuration-layer/update-packages t)
+    (save-buffers-kill-emacs))"
+emacs -eval "(save-buffers-kill-emacs)"
+echo "Done!"
+
