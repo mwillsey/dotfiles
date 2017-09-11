@@ -217,8 +217,8 @@ values."
 
   ;; bind shift-cmd +/- to *globally* modify the font size
   ;; unlike the un-shifted version that is buffer local
-  (global-set-key (kbd "H-+") 'default-text-scale-increase)
-  (global-set-key (kbd "H-_") 'default-text-scale-decrease)
+  (global-set-key (kbd "s-+") 'default-text-scale-increase)
+  (global-set-key (kbd "s-_") 'default-text-scale-decrease)
 
   ;; spacemacs commented this out for now
   (unless (display-graphic-p)
