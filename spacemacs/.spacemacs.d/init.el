@@ -187,7 +187,7 @@ values."
   ;; ignore certain file extensions when looking for files
   ;; needs to be run before helm loads so it can see this when making
   ;; helm-boring-file-regex-list
-  (dolist (pat '(".dropbox" ".synctex.gz" ".DS_Store"))
+  (dolist (pat '(".dropbox" ".dropbox.cache" ".synctex.gz" ".DS_Store"))
     (add-to-list 'completion-ignored-extensions pat))
 
   ;; Appearance and theme
@@ -225,6 +225,8 @@ values."
     (spacemacs-evil/init-evil-terminal-cursor-changer)
     (evil-terminal-cursor-changer-activate))
 
+  ;; sometimes this gets changed without my knowledge, just make sure
+  (setq ispell-program-name (executable-find "aspell"))
 
   ;; please don't ask me, just compile
   (setq compilation-ask-about-save nil)
