@@ -197,6 +197,10 @@ values."
 
 (defun dotspacemacs/user-config ()
 
+  ;; https://bugs.debian.org/766397
+  ;; in 25.2 and earlier
+  (setq tls-program '("gnutls-cli --x509cafile %t -p %p %h"))
+
   (load "init-org")
 
   (spacemacs/set-leader-keys
