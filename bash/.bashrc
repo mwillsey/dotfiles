@@ -23,16 +23,10 @@ export PS1="${GREEN}\u@\h${RESET}:${BLUE}\w${RESET}\n\$ "
 # to avoid actually having local perl modules, I just point PERL5LIB to the
 # stow install so it can find its own perl module
 export PERL5LIB="$STOW_DIR/stow/share/perl5:$PERL5LIB"
-# export PYTHONPATH="$LOCAL/lib/python2.7/site-packages:$PYTHONPATH"
-export PYTHONUSERBASE=$LOCAL
 
-# lazily load python virtualenv wrapper
-# http://virtualenvwrapper.readthedocs.io/en/latest/install.html
+# python stuff pew, pipenv
+export PYTHONUSERBASE=$LOCAL
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=  # don't use project management
-export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-export VIRTUALENVWRAPPER_PYTHON=$(which python2) # use homebrew python instead of macOS
-source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 export EDITOR=vim
 export GLOBIGNORE=".:.."

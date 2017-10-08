@@ -1,9 +1,7 @@
 # .profile
 
 # Use local for local builds
-
-export LOCAL=$HOME/local
-export PREFIX=$LOCAL
+export LOCAL=$HOME/.local
 
 export PATH="$LOCAL/bin:$PATH"
 export MANPATH="$LOCAL/share/man:$MANPATH"
