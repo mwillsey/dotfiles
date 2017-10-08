@@ -197,9 +197,9 @@ values."
 
 (defun dotspacemacs/user-config ()
 
-  ;; https://bugs.debian.org/766397
-  ;; in 25.2 and earlier
-  (setq tls-program '("gnutls-cli --x509cafile %t -p %p %h"))
+  ;; helm bookmark doesn't load right without for some reason
+  ;; https://github.com/syl20bnr/spacemacs/issues/9549
+  (require 'helm-bookmark)
 
   (load "init-org")
 
