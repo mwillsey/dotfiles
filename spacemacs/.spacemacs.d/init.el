@@ -174,12 +174,17 @@ values."
 
 (defun dotspacemacs/user-init ()
 
-  (setq custom-file (concat spacemacs-cache-directory "custom-settings.el"))
+  ;; set the location of various files and folders needed for setup
+  (setq
+   custom-file (expand-file-name "custom-settings.el" spacemacs-cache-directory)
+   dotspacemacs-configuration-layer-path
+               (list (expand-file-name "layers/" dotspacemacs-directory))
+   mw/lisp-dir (expand-file-name "lisp/" dotspacemacs-directory))
 
-  (add-to-load-path (expand-file-name "lisp/" dotspacemacs-directory))
-  (setq dotspacemacs-configuration-layer-path
-        (list
-         (expand-file-name "layers/" dotspacemacs-directory)))
+  ;; set loadpath to mw/lisp-dir and its immediate subdirectories
+  (add-to-load-path mw/lisp-dir)
+  (let ((default-directory mw/lisp-dir))
+    (normal-top-level-add-subdirs-to-load-path))
 
   ;; stop spacemacs from complaining about me setting my path
   (setq exec-path-from-shell-check-startup-files nil)
