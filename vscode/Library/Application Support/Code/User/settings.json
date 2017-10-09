@@ -23,9 +23,12 @@
         "**/.DS_Store": true,
         "**/__pycache__": true,
         "**/*.pyc": true,
-        "**/.vagrant": true
+        "**/.vagrant": true,
+        "**/*.olean": true
     },
 
     "vim.disableAnnoyingGcMessage": true,
-    "vim.disableAnnoyingNeovimMessage": true
+    "vim.disableAnnoyingNeovimMessage": true,
+
+    "lean.executablePath": "/Users/mwillsey/src/leanup/lean_install/bin/lean"
 }

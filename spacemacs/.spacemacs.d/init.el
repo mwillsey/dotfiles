@@ -89,9 +89,10 @@ values."
      lua
      sql
      rust
-
-     ;; other applications
-     pandora ; private layer for now
+     (lean ;; private
+      :variables
+      lean-rootdir "~/src/leanup/lean_install"
+      lean-emacs-path "~/src/leanup/lean_install/share/emacs/site-lisp/lean")
      )
    dotspacemacs-additional-packages '(olivetti
                                       default-text-scale
