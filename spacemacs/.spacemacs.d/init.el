@@ -339,14 +339,10 @@ values."
   (setq flycheck-inferior-dafny-executable "/Users/mwillsey/src/dafny/dafny-server")
 
   ;; browse URLs (including mail) externally
+  ;; to force opening a new tab (instead of window) in Safari
+  ;; defaults write com.apple.Safari TargetedClicksCreateTabs -bool true
   (setq browse-url-mailto-function  'browse-url-generic
-        browse-url-browser-function 'browse-url-generic)
-  (case system-type
-    (darwin
-     (setq browse-url-generic-program "open"))
-    (otherwise
-     (setq browse-url-generic-program "client"
-           browse-url-generic-args '("open"))))
+        browse-url-browser-function 'browse-url-default-browser)
 
   (setq mouse-wheel-scroll-amount '(2 ((shift) . 5))
         mouse-wheel-progressive-speed nil)
