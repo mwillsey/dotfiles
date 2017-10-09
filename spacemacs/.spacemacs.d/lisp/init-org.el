@@ -195,7 +195,7 @@
   "aow" 'mw/org-review)
 
 ;; org attach
-(setq org-attach-directory nil ; disable (mw/dir "attach")
+(setq org-attach-directory (mw/dir "attach")
       org-attach-auto-tag "attach"
       org-attach-commit nil)
 

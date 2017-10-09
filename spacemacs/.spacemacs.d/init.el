@@ -95,9 +95,7 @@ values."
       lean-emacs-path "~/src/leanup/lean_install/share/emacs/site-lisp/lean")
      )
    dotspacemacs-additional-packages '(olivetti
-                                      default-text-scale
-                                      boogie-friends
-                                      arduino-mode)
+                                      default-text-scale)
    dotspacemacs-frozen-packages '()
    dotspacemacs-install-packages 'used-only
    dotspacemacs-excluded-packages '(vi-tilde-fringe
@@ -222,7 +220,10 @@ values."
   (setq helm-ff-skip-boring-files t)
 
   ;; olivetti is better
-  (spacemacs/set-leader-keys "wc" 'olivetti-mode)
+  (spacemacs/set-leader-keys
+    "wc" 'olivetti-mode
+    "wC" 'olivetti-set-width)
+
   (setq-default olivetti-body-width 100)
 
   ;; bind shift-cmd +/- to *globally* modify the font size
