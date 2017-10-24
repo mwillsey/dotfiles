@@ -1,0 +1,7 @@
+
+# ignore everything in vim but the packages
+dotfiles/vim/*
+!dotfiles/vim/pack/*
+
+# ignore spacemacs private layers for now
+dotfiles/spacemacs.d/layers

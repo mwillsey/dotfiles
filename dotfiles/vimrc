@@ -1,9 +1,5 @@
 " Max's .vimrc
 
-" load pathogen and make it load everything else
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-
 " vim-sensible takes care of most defaults
 " but these are just mine
 set linebreak

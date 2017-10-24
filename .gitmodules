@@ -1,12 +1,9 @@
-[submodule "spacemacs/.emacs.d"]
-	path = spacemacs/.emacs.d
-	url = git@github.com:syl20bnr/spacemacs.git
-[submodule "vim/.vim/bundle/vim-pathogen"]
-	path = vim/.vim/bundle/vim-pathogen
-	url = git@github.com:tpope/vim-pathogen.git
-[submodule "vim/.vim/bundle/vim-commentary"]
-	path = vim/.vim/bundle/vim-commentary
-	url = git@github.com:tpope/vim-commentary.git
-[submodule "vim/.vim/bundle/vim-sensible"]
-	path = vim/.vim/bundle/vim-sensible
+[submodule "dotfiles/vim/pack/plugins/start/vim-sensible"]
+	path = dotfiles/vim/pack/plugins/start/vim-sensible
 	url = git@github.com:tpope/vim-sensible.git
+[submodule "dotfiles/vim/pack/plugins/start/vim-surround"]
+	path = dotfiles/vim/pack/plugins/start/vim-surround
+	url = git@github.com:tpope/vim-surround.git
+[submodule "dotfiles/vim/pack/plugins/start/vim-commentary"]
+	path = dotfiles/vim/pack/plugins/start/vim-commentary
+	url = git@github.com:tpope/vim-commentary.git
