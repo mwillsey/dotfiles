@@ -42,7 +42,9 @@ values."
    dotspacemacs-configuration-layer-path '()
    dotspacemacs-configuration-layers
    '(;; system
-     (shell :variables shell-default-shell 'eshell)
+     (shell :variables
+            shell-default-shell 'term
+            shell-default-term-shell (executable-find "bash"))
      osx
 
      ;; emacs
