@@ -41,5 +41,5 @@ done
 # manually install other
 cd $DIR/other/vscode
 for file in *; do
-   mk_link "$(pwd)/$file" "$HOME/Library/Application Support/Code/$file"
+   mk_link "$(pwd)/$file" "$HOME/Library/Application Support/Code/User/$file"
 done
