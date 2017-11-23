@@ -1,17 +1,24 @@
 // Place your settings in this file to overwrite the default settings
 {
 
-     // Controls the font family.
+     // Controls the font
     "editor.fontFamily": "Inconsolata",
-
-    // Controls the font size.
     "editor.fontSize": 14,
+
+    // no tabs please
+    "workbench.editor.showTabs": false,
+    "workbench.editor.enablePreview": false,
+    "explorer.openEditors.visible": 0,
 
     //Latex Compile Configuration
     "latexCompile.openAfterCompile": true,
     "latexCompile.openLogAfterError": true,
     "latexCompile.compiler": "pdflatex",
-    "workbench.colorTheme": "Default Light+",
+
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
 
     "editor.cursorBlinking": "solid",
 
@@ -27,7 +34,6 @@
         "**/*.olean": true
     },
 
-    "vim.disableAnnoyingGcMessage": true,
     "vim.disableAnnoyingNeovimMessage": true,
 
     "lean.executablePath": "/Users/mwillsey/src/leanup/lean_install/bin/lean"
