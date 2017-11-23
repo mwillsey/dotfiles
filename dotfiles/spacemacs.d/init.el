@@ -61,7 +61,7 @@ values."
      graphviz
 
      ;; editing
-     auto-completion
+     ;; auto-completion
      syntax-checking
      spell-checking
      semantic
@@ -84,28 +84,24 @@ values."
      typescript
 
      ;; other langs
-     (haskell :variables haskell-completion-backend 'intero)
+     ocaml
      racket
-     idris
      python
-     go
      yaml
-     lua
      sql
-     rust
-     (lean ;; private
-      :variables
-      lean-rootdir "~/src/leanup/lean_install"
-      lean-emacs-path "~/src/leanup/lean_install/share/emacs/site-lisp/lean")
+     major-modes ;; scad, etc.
      )
+
    dotspacemacs-additional-packages '(olivetti
                                       default-text-scale)
    dotspacemacs-frozen-packages '()
-   dotspacemacs-install-packages 'used-only
+   dotspacemacs-install-packages 'used-but-keep-unused
    dotspacemacs-excluded-packages '(vi-tilde-fringe
                                     evil-tutor
                                     yasnippet
-                                    powerline)))
+                                    ;; powerline
+                                    wolfram-mode ;; from major-modes
+                                    )))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -116,6 +112,7 @@ values."
   (setq-default
    dotspacemacs-elpa-https t
    dotspacemacs-elpa-timeout 5
+   dotspacemacs-verify-spacelpa-archives t
    dotspacemacs-check-for-update t
    dotspacemacs-elpa-subdirectory (format "%d-%s" emacs-major-version
                                           (spacemacs//git-get-current-branch))
@@ -125,7 +122,8 @@ values."
    dotspacemacs-startup-lists '()
    dotspacemacs-startup-buffer-responsive t
    dotspacemacs-scratch-mode 'text-mode
-   dotspacemacs-themes '(spacemacs-light
+   dotspacemacs-themes '(leuven
+                         spacemacs-light
                          spacemacs-dark)
    dotspacemacs-colorize-cursor-according-to-state t
    dotspacemacs-default-font '("Inconsolata"
@@ -154,7 +152,7 @@ values."
    dotspacemacs-enable-paste-transient-state t
    dotspacemacs-which-key-delay 0.4
    dotspacemacs-which-key-position 'bottom
-   dotspacemacs-loading-progress-bar t
+   dotspacemacs-loading-progress-bar nil
    dotspacemacs-fullscreen-at-startup nil
    dotspacemacs-fullscreen-use-non-native t
    dotspacemacs-maximized-at-startup nil
@@ -170,12 +168,18 @@ values."
    dotspacemacs-smart-closing-parenthesis nil
    dotspacemacs-highlight-delimiters 'all
    dotspacemacs-persistent-server nil
-   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
    dotspacemacs-default-package-repository nil
    dotspacemacs-whitespace-cleanup 'trailing
+   dotspacemacs-frame-title-format "%I@%S"
+   dotspacemacs-icon-title-format nil
+   dotspacemacs-zone-out-when-idle nil
+   dotspacemacs-pretty-docs nil
    ))
 
 (defun dotspacemacs/user-init ()
+
+  (add-to-list 'exec-path "/usr/local/bin")
 
   ;; set the location of various files and folders needed for setup
   (setq
@@ -205,9 +209,7 @@ values."
 
 (defun dotspacemacs/user-config ()
 
-  ;; helm bookmark doesn't load right without for some reason
-  ;; https://github.com/syl20bnr/spacemacs/issues/9549
-  (require 'helm-bookmark)
+  (global-set-key (kbd "H-h") 'ns-do-hide-emacs)
 
   (spacemacs/set-leader-keys
     "RET" 'helm-mini
@@ -230,8 +232,8 @@ values."
 
   ;; bind shift-cmd +/- to *globally* modify the font size
   ;; unlike the un-shifted version that is buffer local
-  (global-set-key (kbd "s-+") 'default-text-scale-increase)
-  (global-set-key (kbd "s-_") 'default-text-scale-decrease)
+  (global-set-key (kbd "H-+") 'default-text-scale-increase)
+  (global-set-key (kbd "H-_") 'default-text-scale-decrease)
 
   ;; spacemacs commented this out for now
   (unless (display-graphic-p)
@@ -246,6 +248,10 @@ values."
 
   (with-eval-after-load 'lua
     (setq lua-indent-level 4))
+
+  ;; make sure to django/liquid/jekyll templating
+  (setq web-mode-engines-alist
+        '(("django" . "\\.html\\'")))
 
 
   (spacemacs/set-leader-keys "bt" 'mw/open-terminal)
@@ -315,12 +321,6 @@ values."
   (with-eval-after-load 'osx-dictionary
     (add-hook 'osx-dictionary-mode-hook 'mw/enable-writing-long-lines))
 
-  (use-package llvm-mode
-    :load-path "~/src/llvm/utils/emacs")
-
-  ;; just use go mode for antha
-  (add-to-list 'auto-mode-alist '("\\.an\\'" . go-mode))
-
   (with-eval-after-load 'tide
     (setq tide-tsserver-executable "/usr/local/bin/tsserver"))
 
@@ -386,12 +386,19 @@ values."
   (with-eval-after-load 'python
     (setq python-shell-completion-native-enable nil
           python-shell-interpreter "python3"
-          python-test-runner 'pytest))
+          python-test-runner 'pytest
+          pytest-cmd-flags "-x -s -vvv"))
 
   (with-eval-after-load 'magit
     ;; don't use use built-in vc anymore
     (setq vc-handled-backends (delq 'Git vc-handled-backends))
     ;; save my files for me
-    (setq magit-save-repository-buffers 'dontask))
+    (setq magit-save-repository-buffers 'dontask
+          magit-diff-refine-hunk t))
+
+  (with-eval-after-load 'graphviz-dot-mode
+    (setq graphviz-dot-view-command "open %s")
+    (spacemacs/set-leader-keys-for-major-mode 'graphviz-dot-mode
+      "v" 'graphviz-dot-view))
 
   (setq gc-cons-threshold (* 800 1024)))
