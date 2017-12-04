@@ -43,8 +43,7 @@ values."
    dotspacemacs-configuration-layers
    '(;; system
      (shell :variables
-            shell-default-shell 'term
-            shell-default-term-shell (executable-find "bash"))
+            shell-default-shell 'shell)
      osx
 
      ;; emacs
@@ -61,7 +60,7 @@ values."
      graphviz
 
      ;; editing
-     ;; auto-completion
+     auto-completion
      syntax-checking
      spell-checking
      semantic

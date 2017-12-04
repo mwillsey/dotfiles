@@ -12,12 +12,7 @@
                               :fetcher github))
         ))
 
-(defun mw-org/pre-init-org ()
-
-  (message "PRE INIT **************")
-
-
-  )
+(defun mw-org/pre-init-org ())
 
 
 (defun mw-org/post-init-org ()
@@ -65,7 +60,6 @@
              ("\\.x?html?\\'" .  "client open %s")
              ("\\.pdf\\'"     .  "client open %s")))))
 
-  (message "POST INIT **************")
   (add-hook 'org-mode-hook 'mw/org-mode-hook)
   (defun mw/org-mode-hook ()
     (auto-fill-mode 1))
