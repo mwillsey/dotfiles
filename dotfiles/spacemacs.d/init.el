@@ -89,6 +89,7 @@ values."
      yaml
      sql
      major-modes ;; scad, etc.
+     lean
      )
 
    dotspacemacs-additional-packages '(olivetti
@@ -208,6 +209,7 @@ values."
 (defun dotspacemacs/user-config ()
 
   (global-set-key (kbd "H-h") 'ns-do-hide-emacs)
+  (evil-global-set-key 'insert (kbd "C-SPC") 'helm-company)
 
   (spacemacs/set-leader-keys
     "RET" 'helm-mini
