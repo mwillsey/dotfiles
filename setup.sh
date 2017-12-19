@@ -3,18 +3,22 @@
 # get this directory
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+[ -z "$LOCAL" ] && echo "set LOCAL to something" && exit 1
+
 mk_link () {
    source=$1
    target=$2
-   real_source=`realpath "$source"`
-   real_target=`realpath "$target"`
 
    # check for existing file or broken symlink
-   if [ "$real_source" = "$real_target" ]; then
-       echo "OK.     '$source' already linked."
-       true
-   elif [ -e "$target" ]; then
-       >&2 echo "SKIP!   File '$target' exists."
+   if [ -e "$target" ]; then
+       real_source=`realpath "$source"`
+       real_target=`realpath "$target"`
+       if [ "$real_source" = "$real_target" ]; then
+           echo "OK.     '$source' already linked."
+           true
+       else
+           >&2 echo "SKIP!   File '$target' exists."
+       fi
    elif [ -h "$target" ]; then
        >&2 echo "SKIP!   Broken symlink '$target' exists."
    else
