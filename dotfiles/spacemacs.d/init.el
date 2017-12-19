@@ -36,7 +36,7 @@
 You should not put any user code in this function besides modifying the variable
 values."
   (setq-default
-   dotspacemacs-distribution 'spacemacs
+   dotspacemacs-distribution 'spacemacs-base
    dotspacemacs-enable-lazy-installation 'unused
    dotspacemacs-ask-for-lazy-installation t
    dotspacemacs-configuration-layer-path '()
@@ -49,21 +49,27 @@ values."
      ;; emacs
      emacs-lisp
      helm
-     spacemacs-org
      org
      mw-org ;; private
+
+     ;; manually pick some of the spacemacs layers because I'm using
+     ;; spacemacs-base, but leave out some
+     spacemacs-editing
+     spacemacs-evil
+     spacemacs-completion
+     spacemacs-org
 
      ;; tools
      git
      github
      vagrant
      graphviz
+     neotree
 
      ;; editing
      auto-completion
      syntax-checking
      spell-checking
-     semantic
 
      ;; tex
      bibtex
@@ -74,7 +80,6 @@ values."
      ;; c
      (c-c++ :variables
             c-c++-enable-clang-support t)
-     gtags
 
      ;; web
      html
@@ -314,9 +319,6 @@ values."
 
   (with-eval-after-load 'helm
     (define-key helm-map (kbd "<C-return>") 'helm-select-action))
-
-  (setq powerline-default-separator 'bar)
-  (spaceline-compile)
 
   (with-eval-after-load 'osx-dictionary
     (add-hook 'osx-dictionary-mode-hook 'mw/enable-writing-long-lines))
