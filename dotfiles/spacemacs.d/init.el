@@ -104,7 +104,6 @@ values."
    dotspacemacs-excluded-packages '(vi-tilde-fringe
                                     evil-tutor
                                     yasnippet
-                                    ;; powerline
                                     wolfram-mode ;; from major-modes
                                     )))
 
@@ -159,7 +158,7 @@ values."
    dotspacemacs-loading-progress-bar nil
    dotspacemacs-fullscreen-at-startup nil
    dotspacemacs-fullscreen-use-non-native t
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    dotspacemacs-active-transparency 100
    dotspacemacs-inactive-transparency 90
    dotspacemacs-show-transient-state-title t
@@ -174,9 +173,9 @@ values."
    dotspacemacs-persistent-server nil
    dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
    dotspacemacs-default-package-repository nil
-   dotspacemacs-whitespace-cleanup 'trailing
    dotspacemacs-frame-title-format "%I@%S"
    dotspacemacs-icon-title-format nil
+   dotspacemacs-whitespace-cleanup 'trailing
    dotspacemacs-zone-out-when-idle nil
    dotspacemacs-pretty-docs nil
    ))
