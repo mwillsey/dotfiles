@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+
+host=$1
+
+ssh -f -N -L 6900:127.0.0.1:5900 $host &
+ssh_pid="$!"
+sleep 1
+open -W vnc://127.0.0.1:6900
+echo "Done!"
+kill $ssh_pid
+
