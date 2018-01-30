@@ -1,5 +1,10 @@
 # .profile
 
+# linux brew paths
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+
 # Use local for local builds
 export LOCAL=$HOME/.local
 
@@ -19,11 +24,11 @@ if hash go 2>/dev/null; then
 fi
 
 # switch homes on the misl machines
-if [ $HOSTNAME == "misl-a.cs.washington.edu" ]
-then
-    export HOME=/ssd1/home/$USER
-    cd $HOME
-fi
+#if [ $HOSTNAME == "misl-a.cs.washington.edu" ]
+#then
+#    export HOME=/ssd1/home/$USER
+#    cd $HOME
+#fi
 
 # OPAM configuration
 ocaml_init=$HOME/.opam/opam-init/init.sh
